@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Brain — DieOuwe Kennisbank</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<style>
+:root {
+  --bg-dark:    #0b0d12;
+  --bg-mid:     #10131a;
+  --bg-light:   #161922;
+  --bg-card:    #1a1e2a;
+  --border:     #1e2235;
+  --border-hl:  #2a2f45;
+  --gold:       #f5a623;
+  --gold-dim:   #c07d10;
+  --purple:     #bf00ff;
+  --blue:       #00dfff;
+  --blue-soft:  #3d9eff;
+  --green:      #2ecc71;
+  --red:        #e74c3c;
+  --text:       #cdd6f4;
+  --text-muted: #6c7086;
+  --text-dim:   #45475a;
+  --mono:       'JetBrains Mono', 'Fira Code', monospace;
+  --sans:       'Segoe UI', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg-dark);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── LAYOUT ── */
+.layout { display: flex; min-height: 100vh; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: var(--bg-light);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  padding: 20px 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-logo h1 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+.sidebar-logo p {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.sidebar-search {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-search input {
+  width: 100%;
+  background: var(--bg-mid);
+  border: 1px solid var(--border-hl);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: var(--text);
+  font-size: 12px;
+  outline: none;
+  font-family: var(--sans);
+}
+
+.sidebar-search input:focus {
+  border-color: var(--blue-soft);
+}
+
+.sidebar-search input::placeholder { color: var(--text-dim); }
+
+.nav-section { padding: 6px 0; }
+
+.nav-label {
+  padding: 6px 16px 3px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: all 0.12s;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: var(--bg-card);
+  color: var(--text);
+  border-left-color: var(--border-hl);
+}
+
+.nav-item.active {
+  background: rgba(245, 166, 35, 0.08);
+  color: var(--gold);
+  border-left-color: var(--gold);
+  font-weight: 500;
+}
+
+.nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-knowledge { background: var(--green); }
+.dot-api       { background: var(--blue); }
+.dot-tokens    { background: var(--purple); }
+.dot-skills    { background: var(--gold); }
+.dot-contribute{ background: var(--text-dim); }
+.dot-i18n      { background: var(--blue-soft); }
+
+/* ── MAIN ── */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--bg-light);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.breadcrumb span { color: var(--text); font-weight: 500; }
+
+.topbar-badges { display: flex; gap: 8px; align-items: center; }
+
+.badge {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.badge-midnight { background: rgba(191,0,255,0.15); color: var(--purple); border: 1px solid rgba(191,0,255,0.3); }
+.badge-version  { background: rgba(245,166,35,0.12); color: var(--gold);   border: 1px solid rgba(245,166,35,0.25); }
+
+/* ── CONTENT ── */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px 40px;
+  max-width: 960px;
+}
+
+/* ── HERO (home) ── */
+.hero {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 32px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--purple), var(--blue), var(--gold));
+}
+
+.hero h2 { font-size: 22px; color: var(--gold); margin-bottom: 6px; }
+.hero p  { color: var(--text-muted); font-size: 13px; max-width: 600px; }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.card:hover {
+  border-color: var(--border-hl);
+  background: #1e2235;
+  transform: translateY(-1px);
+}
+
+.card-icon { font-size: 20px; margin-bottom: 8px; }
+.card h3   { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.card p    { font-size: 11px; color: var(--text-muted); }
+.card-count { font-size: 10px; color: var(--text-dim); margin-top: 6px; }
+
+/* ── MARKDOWN CONTENT ── */
+.md-body { color: var(--text); }
+.md-body h1 { font-size: 22px; color: var(--gold); margin: 0 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.md-body h2 { font-size: 16px; color: var(--blue); margin: 28px 0 12px; }
+.md-body h3 { font-size: 14px; color: var(--text); font-weight: 600; margin: 20px 0 8px; }
+.md-body p  { margin: 0 0 12px; line-height: 1.75; }
+.md-body a  { color: var(--blue-soft); text-decoration: none; }
+.md-body a:hover { text-decoration: underline; }
+
+.md-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 20px;
+  font-size: 13px;
+}
+
+.md-body th {
+  background: var(--bg-mid);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  text-align: left;
+  border: 1px solid var(--border);
+}
+
+.md-body td {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.md-body tr:hover td { background: rgba(255,255,255,0.02); }
+
+.md-body code {
+  background: var(--bg-mid);
+  color: var(--blue);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.md-body pre {
+  background: var(--bg-mid);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 12px 0 20px;
+  position: relative;
+}
+
+.md-body pre code {
+  background: none;
+  color: var(--text);
+  padding: 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.md-body blockquote {
+  border-left: 3px solid var(--gold);
+  padding: 8px 16px;
+  margin: 12px 0;
+  background: rgba(245,166,35,0.05);
+  border-radius: 0 6px 6px 0;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.md-body ul, .md-body ol { padding-left: 20px; margin: 8px 0 12px; }
+.md-body li { margin: 3px 0; }
+.md-body hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+/* verified badges in tables */
+.md-body td:has-text { }
+
+/* ── STATUS PILLS ── */
+.verified   { color: var(--green); font-weight: 600; }
+.probable   { color: var(--gold); font-weight: 600; }
+.unverified { color: var(--text-muted); }
+.deprecated { color: var(--red); text-decoration: line-through; }
+
+/* ── LANG SWITCHER ── */
+.lang-bar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 24px;
+  background: var(--bg-mid);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.lang-btn {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border-hl);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.lang-btn:hover, .lang-btn.active {
+  background: rgba(0,223,255,0.1);
+  color: var(--blue);
+  border-color: var(--blue-soft);
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  padding: 16px 40px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-dim);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.page-footer a { color: var(--text-muted); text-decoration: none; }
+.page-footer a:hover { color: var(--blue); }
+
+/* ── LOADING ── */
+.loading { text-align: center; padding: 60px; color: var(--text-muted); }
+.loading .spinner { font-size: 24px; animation: spin 1s linear infinite; display: inline-block; margin-bottom: 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--border-hl); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .content { padding: 20px 16px; }
+  .topbar { padding: 10px 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h1>🧠 Project Brain</h1>
+      <p>DieOuwe · WoW 12.0.5 Midnight</p>
+    </div>
+
+    <div class="sidebar-search">
+      <input type="text" id="search" placeholder="Zoek in kennisbank..." oninput="filterNav(this.value)">
+    </div>
+
+    <nav id="nav">
+      <div class="nav-section">
+        <div class="nav-label">Start</div>
+        <a class="nav-item active" data-page="home" onclick="loadPage('home')">
+          <span class="nav-dot" style="background:var(--gold)"></span>Home
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">Kennisbank</div>
+        <a class="nav-item" data-page="knowledge/known-bugs" onclick="loadPage('knowledge/known-bugs')">
+          <span class="nav-dot dot-knowledge"></span>Bekende Bugs
+        </a>
+        <a class="nav-item" data-page="knowledge/compass-math" onclick="loadPage('knowledge/compass-math')">
+          <span class="nav-dot dot-knowledge"></span>Kompas Wiskunde
+        </a>
+        <a class="nav-item" data-page="knowledge/currencies-and-rewards" onclick="loadPage('knowledge/currencies-and-rewards')">
+          <span class="nav-dot dot-knowledge"></span>Currency IDs
+        </a>
+        <a class="nav-item" data-page="knowledge/maps-and-zones" onclick="loadPage('knowledge/maps-and-zones')">
+          <span class="nav-dot dot-knowledge"></span>Maps & Zones
+        </a>
+        <a class="nav-item" data-page="knowledge/prey-database" onclick="loadPage('knowledge/prey-database')">
+          <span class="nav-dot dot-knowledge"></span>Prey Database
+        </a>
+        <a class="nav-item" data-page="knowledge/spells-and-auras" onclick="loadPage('knowledge/spells-and-auras')">
+          <span class="nav-dot dot-knowledge"></span>Spells & Auras
+        </a>
+        <a class="nav-item" data-page="knowledge/addon-architecture" onclick="loadPage('knowledge/addon-architecture')">
+          <span class="nav-dot dot-knowledge"></span>Addon Architectuur
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">API Referentie</div>
+        <a class="nav-item" data-page="api/blizzard-api-reference" onclick="loadPage('api/blizzard-api-reference')">
+          <span class="nav-dot dot-api"></span>Blizzard API
+        </a>
+        <a class="nav-item" data-page="api/deprecated-calls" onclick="loadPage('api/deprecated-calls')">
+          <span class="nav-dot dot-api"></span>Deprecated Calls
+        </a>
+        <a class="nav-item" data-page="api/events-reference" onclick="loadPage('api/events-reference')">
+          <span class="nav-dot dot-api"></span>Events Referentie
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">Tokens & Keys</div>
+        <a class="nav-item" data-page="tokens-and-keys/github-pat" onclick="loadPage('tokens-and-keys/github-pat')">
+          <span class="nav-dot dot-tokens"></span>GitHub PAT
+        </a>
+        <a class="nav-item" data-page="tokens-and-keys/curseforge-api-key" onclick="loadPage('tokens-and-keys/curseforge-api-key')">
+          <span class="nav-dot dot-tokens"></span>CurseForge Key
+        </a>
+        <a class="nav-item" data-page="tokens-and-keys/discord-bot-token" onclick="loadPage('tokens-and-keys/discord-bot-token')">
+          <span class="nav-dot dot-tokens"></span>Discord Token
+        </a>
+        <a class="nav-item" data-page="tokens-and-keys/blizzard-oauth" onclick="loadPage('tokens-and-keys/blizzard-oauth')">
+          <span class="nav-dot dot-tokens"></span>Blizzard OAuth
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">Organisatie</div>
+        <a class="nav-item" data-page="skills/skill-register" onclick="loadPage('skills/skill-register')">
+          <span class="nav-dot dot-skills"></span>Skill Register
+        </a>
+        <a class="nav-item" data-page="contributing" onclick="loadPage('contributing')">
+          <span class="nav-dot dot-contribute"></span>Bijdragen
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- LANG BAR -->
+    <div class="lang-bar">
+      <button class="lang-btn active" onclick="setLang('nl')">🇳🇱 NL</button>
+      <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
+      <button class="lang-btn" onclick="setLang('de')">🇩🇪 DE</button>
+      <button class="lang-btn" onclick="setLang('fr')">🇫🇷 FR</button>
+    </div>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="breadcrumb" id="breadcrumb">
+        Project Brain <span id="bc-page">Home</span>
+      </div>
+      <div class="topbar-badges">
+        <span class="badge badge-midnight">Midnight 12.0.5</span>
+        <span class="badge badge-version">Interface 120005</span>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content" id="content">
+      <div id="page-body"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <span>© 2026 DieOuwe · <a href="https://www.dieouwe.nl">dieouwe.nl</a> · <a href="https://discord.gg/y8Pu5qsEbQ">Discord</a></span>
+      <span>CC BY-SA 4.0 · <a href="https://github.com/Die0uwe/project-brain">GitHub</a> · WoW Retail 12.0.5 Midnight</span>
+    </footer>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ──
+const BASE = 'https://raw.githubusercontent.com/Die0uwe/project-brain/main/';
+const I18N = { nl: 'docs/', en: 'i18n/en/', de: 'i18n/de/', fr: 'i18n/fr/' };
+let currentLang = 'nl';
+let currentPage = 'home';
+
+// ── MARKED CONFIG ──
+marked.setOptions({ breaks: true, gfm: true });
+
+// ── HOMEPAGE ──
+const homeContent = `
+<div class="hero">
+  <h2>🧠 DieOuwe Ecosysteem Kennisbank</h2>
+  <p>Centrale referentie voor WoW Addon ontwikkeling, CurseBot en de Slayer Alliance suite.<br>
+  Build target: <strong>WoW Retail 12.0.5.67314 (Midnight)</strong> · Interface 120005</p>
+</div>
+
+<div class="cards-grid">
+  <div class="card" onclick="loadPage('knowledge/known-bugs')">
+    <div class="card-icon">🐛</div>
+    <h3>Bekende Bugs</h3>
+    <p>Crashes, deprecated calls, taint issues en workarounds</p>
+    <div class="card-count">WoW + CurseBot + WordPress</div>
+  </div>
+  <div class="card" onclick="loadPage('knowledge/compass-math')">
+    <div class="card-icon">🧭</div>
+    <h3>Kompas Wiskunde</h3>
+    <p>De heilige formule voor prey tracker kompas naald rotatie</p>
+    <div class="card-count">VERIFIED · V3.6</div>
+  </div>
+  <div class="card" onclick="loadPage('api/blizzard-api-reference')">
+    <div class="card-icon">⚡</div>
+    <h3>Blizzard API</h3>
+    <p>Actieve C_* namespaces, calls en codevoorbeelden</p>
+    <div class="card-count">12.0.5 Midnight</div>
+  </div>
+  <div class="card" onclick="loadPage('api/deprecated-calls')">
+    <div class="card-icon">⛔</div>
+    <h3>Deprecated Calls</h3>
+    <p>Verboden API calls die crashes of taint veroorzaken</p>
+    <div class="card-count">NOOIT gebruiken</div>
+  </div>
+  <div class="card" onclick="loadPage('knowledge/prey-database')">
+    <div class="card-icon">🎯</div>
+    <h3>Prey Database</h3>
+    <p>Quest IDs, NPC data en prey tracking API patronen</p>
+    <div class="card-count">Range 91095–91400</div>
+  </div>
+  <div class="card" onclick="loadPage('tokens-and-keys/github-pat')">
+    <div class="card-icon">🔑</div>
+    <h3>Tokens & Keys</h3>
+    <p>Hoe je GitHub, CurseForge, Discord en Blizzard tokens aanmaakt</p>
+    <div class="card-count">Geen echte waarden opgeslagen</div>
+  </div>
+  <div class="card" onclick="loadPage('skills/skill-register')">
+    <div class="card-icon">🤖</div>
+    <h3>Skill Register</h3>
+    <p>Alle Claude skills, hiërarchie en routing matrix</p>
+    <div class="card-count">25+ skills</div>
+  </div>
+  <div class="card" onclick="loadPage('contributing')">
+    <div class="card-icon">🤝</div>
+    <h3>Bijdragen</h3>
+    <p>Fork het repo en voeg jouw kennis toe aan de community</p>
+    <div class="card-count">PR welkom · 4 talen</div>
+  </div>
+</div>`;
+
+// ── LOAD PAGE ──
+async function loadPage(page) {
+  currentPage = page;
+
+  // Update nav
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const activeEl = document.querySelector(\`[data-page="\${page}"]\`);
+  if (activeEl) activeEl.classList.add('active');
+
+  // Update breadcrumb
+  const label = activeEl ? activeEl.textContent.trim() : page;
+  document.getElementById('bc-page').textContent = label;
+
+  // Home
+  if (page === 'home') {
+    document.getElementById('page-body').innerHTML = homeContent;
+    return;
+  }
+
+  // Show loading
+  document.getElementById('page-body').innerHTML = '<div class="loading"><div class="spinner">⚙</div><br>Laden...</div>';
+
+  // Determine URL based on lang + page
+  let url = buildUrl(page);
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      // Fallback to NL if translation missing
+      if (currentLang !== 'nl') {
+        const fallback = await fetch(BASE + 'docs/' + page + '.md');
+        if (fallback.ok) {
+          const md = await fallback.text();
+          renderMarkdown(md, true);
+          return;
+        }
+      }
+      document.getElementById('page-body').innerHTML = \`<div class="loading">📄 Pagina niet gevonden<br><small style="color:var(--text-dim)">URL: \${url}</small></div>\`;
+      return;
+    }
+    const md = await res.text();
+    renderMarkdown(md, false);
+  } catch(e) {
+    document.getElementById('page-body').innerHTML = \`<div class="loading">⚠️ Kon niet laden<br><small style="color:var(--text-dim)">\${e.message}</small></div>\`;
+  }
+}
+
+function buildUrl(page) {
+  // i18n mapping
+  const i18nPages = {
+    'en': ['knowledge/known-bugs', 'knowledge/compass-math', 'api/deprecated-calls', 'tokens-and-keys/github-pat'],
+    'de': [],
+    'fr': [],
+  };
+  if (currentLang !== 'nl' && i18nPages[currentLang] && i18nPages[currentLang].includes(page)) {
+    return BASE + \`i18n/\${currentLang}/\${page}.md\`;
+  }
+  // Special pages
+  if (page === 'contributing') return BASE + 'CONTRIBUTING.md';
+  return BASE + 'docs/' + page + '.md';
+}
+
+function renderMarkdown(md, isFallback) {
+  // Strip HTML comments (headers/footers)
+  const clean = md.replace(/<!--[\s\S]*?-->/g, '').trim();
+  
+  // Color VERIFIED/PROBABLE/UNVERIFIED/DEPRECATED in tables
+  const colored = clean
+    .replace(/\bVERIFIED\b/g, '<span class="verified">VERIFIED</span>')
+    .replace(/\bPROBABLE\b/g, '<span class="probable">PROBABLE</span>')
+    .replace(/\bUNVERIFIED\b/g, '<span class="unverified">UNVERIFIED</span>')
+    .replace(/\bDEPRECATED\b/g, '<span class="deprecated">DEPRECATED</span>');
+
+  const html = marked.parse(colored);
+  const fallbackNote = isFallback ? '<blockquote>⚠️ Geen vertaling beschikbaar — weergave in het Nederlands</blockquote>' : '';
+  document.getElementById('page-body').innerHTML = \`<div class="md-body">\${fallbackNote}\${html}</div>\`;
+}
+
+// ── LANG SWITCH ──
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  loadPage(currentPage);
+}
+
+// ── NAV FILTER ──
+function filterNav(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.nav-item').forEach(el => {
+    const show = !q || el.textContent.toLowerCase().includes(q);
+    el.style.display = show ? '' : 'none';
+  });
+}
+
+// ── INIT ──
+loadPage('home');
+</script>
+</body>
+</html>
