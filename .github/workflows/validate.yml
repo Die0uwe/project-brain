@@ -1,0 +1,57 @@
+name: Validate Knowledge Base
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Markdown lint check
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for secrets (never allow real tokens)
+        run: |
+          echo "Scanning for potential secrets..."
+          # Detect ghp_ tokens (GitHub PAT)
+          if grep -r "ghp_[A-Za-z0-9]" --include="*.md" .; then
+            echo "❌ GitHub PAT token detected in markdown! Remove immediately."
+            exit 1
+          fi
+          # Detect discord tokens (rough pattern)
+          if grep -rE "[A-Za-z0-9_-]{24}\.[A-Za-z0-9_-]{6}\.[A-Za-z0-9_-]{27}" --include="*.md" .; then
+            echo "❌ Possible Discord token detected! Remove immediately."
+            exit 1
+          fi
+          echo "✅ No secrets detected"
+
+      - name: Verify CONTEXT.md exists
+        run: |
+          if [ ! -f "CONTEXT.md" ]; then
+            echo "❌ CONTEXT.md missing from repo root!"
+            exit 1
+          fi
+          echo "✅ CONTEXT.md present"
+
+      - name: Verify required docs exist
+        run: |
+          required=(
+            "docs/knowledge/known-bugs.md"
+            "docs/knowledge/compass-math.md"
+            "docs/knowledge/currencies-and-rewards.md"
+            "docs/api/deprecated-calls.md"
+            "docs/skills/skill-register.md"
+            "README.md"
+          )
+          for f in "${required[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "❌ Required file missing: $f"
+              exit 1
+            fi
+          done
+          echo "✅ All required docs present"
