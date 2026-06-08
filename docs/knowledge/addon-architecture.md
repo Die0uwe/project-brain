@@ -122,3 +122,46 @@ end
      ─────────────────────────────────────────────────────────
      DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
      ============================================================ -->
+
+---
+
+## Midnight 12.0.5 — Nieuwe Architectuur Inzichten (PDF analyse 2026-06-09)
+
+### Secret Values (nieuw in 12.0.x)
+- Combat data (cooldowns, buffs, debuffs) zijn nu "secret values"
+- Addons mogen ze TONEN maar niet gebruiken als beslislogica
+- `SecretArguments = "AllowedWhenUntainted"` in API metadata
+- Helper functies: `issecretvalue()`, `scrubsecretvalues()`
+- Restriction check: `C_RestrictedActions.IsAddOnRestrictionActive()`
+
+### macrotext limiet SecureActionButtonTemplate
+- Gemaximeerd op **255 tekens** (sinds 11.0.2)
+- Geen lange macro strings in secure buttons gebruiken
+
+### Frame Pooling (Midnight best practice)
+```lua
+local pool = CreateFramePool("Button", parent, "UIPanelButtonTemplate",
+    function(_, btn) btn:ClearAllPoints(); btn:Hide() end)
+-- Gebruik:
+local btn = pool:Acquire()
+-- Opruimen:
+pool:ReleaseAll()
+```
+
+### ExportInterfaceFiles (vervangt Interface AddOn Kit)
+- `/ExportInterfaceFiles code` in WoW client
+- Mirror: github.com/Gethe/wow-ui-source
+
+### SavedVariables initialisatie — KRITIEKE volgorde
+1. Bestanden worden uitgevoerd bij laden (top-level Lua)
+2. ADDON_LOADED → nu pas SavedVariables beschikbaar
+3. PLAYER_ENTERING_WORLD → runtime init
+- **NOOIT** SavedVariables lezen in top-level Lua code!
+- Altijd in ADDON_LOADED handler initialiseren
+
+### C_ClassColor API (vervanging RAID_CLASS_COLORS)
+```lua
+local cm = C_ClassColor.GetClassColor("WARLOCK")  -- uppercase classToken
+-- cm.r, cm.g, cm.b (0-1 range)
+-- cm:GetHexColor() → "rrggbb" string
+```
