@@ -1,3 +1,9 @@
+<!-- ============================================================
+     Project Brain — DieOuwe Ecosysteem Kennisbank
+     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
+     ============================================================ -->
+
 # CurseForge API Key — Hoe te verkrijgen
 > Beheerder: wow-brain-manager · Nooit echte keys opslaan in dit bestand
 
@@ -58,3 +64,10 @@ cf_key = km.get_key("curseforge_api_key")
 - 100 requests per uur per key (gratis tier)
 - Bij 429 response: exponential backoff (0.5s, 1s, 2s, 4s)
 - Zie `docs/knowledge/known-bugs.md` voor de backoff implementatie
+
+<!-- ============================================================
+     File    : docs/tokens-and-keys/curseforge-api-key.md
+     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
+     Status  : New
+     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     ============================================================ -->

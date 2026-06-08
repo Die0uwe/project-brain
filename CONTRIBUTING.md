@@ -1,3 +1,9 @@
+<!-- ============================================================
+     Project Brain — DieOuwe Ecosysteem Kennisbank
+     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
+     ============================================================ -->
+
 # Contributing to Project Brain
 
 > DieOuwe Ecosysteem · WoW Retail 12.0.5 Midnight · github.com/Die0uwe/project-brain
@@ -83,3 +89,10 @@ Pull Requests worden gereviewd door de maintainers (DieOuwe team).
 Gemiddelde reactietijd: 1–3 dagen.
 
 Bij vragen: open een Issue of kom langs op [Discord](https://discord.gg/y8Pu5qsEbQ).
+
+<!-- ============================================================
+     File    : CONTRIBUTING.md
+     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
+     Status  : New
+     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     ============================================================ -->

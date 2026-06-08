@@ -1,3 +1,9 @@
+<!-- ============================================================
+     Project Brain — DieOuwe Ecosysteem Kennisbank
+     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
+     ============================================================ -->
+
 # Discord Bot Token — Hoe te verkrijgen
 > Beheerder: wow-brain-manager · Nooit echte tokens opslaan in dit bestand
 
@@ -75,3 +81,10 @@ bot.run(token)
 - ❌ Nooit in Discord zelf sturen (ook niet privé)
 - ✅ Opslaan via `cursebot-security` key_manager
 - ✅ Bij twijfel: direct resetten en nieuwe token gebruiken
+
+<!-- ============================================================
+     File    : docs/tokens-and-keys/discord-bot-token.md
+     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
+     Status  : New
+     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     ============================================================ -->

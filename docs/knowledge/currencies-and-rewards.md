@@ -1,3 +1,9 @@
+<!-- ============================================================
+     Project Brain — DieOuwe Ecosysteem Kennisbank
+     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
+     ============================================================ -->
+
 # Currency IDs & Reward Systemen
 > Status: VERIFIED · Build: 12.0.5.67314 (Midnight) · Beheerder: data-grinder
 
@@ -60,3 +66,10 @@ Zie ook `docs/knowledge/maps-and-zones.md` voor bank locaties.
 - **VERIFIED** — Meerdere bronnen, zelf getest
 - **PROBABLE** — Één betrouwbare bron
 - **UNVERIFIED** — Niet getest
+
+<!-- ============================================================
+     File    : docs/knowledge/currencies-and-rewards.md
+     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
+     Status  : New
+     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     ============================================================ -->

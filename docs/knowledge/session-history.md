@@ -1,3 +1,9 @@
+<!-- ============================================================
+     Project Brain — DieOuwe Ecosysteem Kennisbank
+     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
+     ============================================================ -->
+
 # Sessie Geschiedenis & Lessen
 > Beheerder: data-grinder · Elke sessie voegt een entry toe
 
@@ -41,3 +47,10 @@
 ---
 
 *Voeg nieuwe sessies toe bovenaan (nieuwste eerst)*
+
+<!-- ============================================================
+     File    : docs/knowledge/session-history.md
+     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
+     Status  : New
+     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     ============================================================ -->

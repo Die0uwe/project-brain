@@ -1,3 +1,9 @@
+<!-- ============================================================
+     Project Brain — DieOuwe Ecosysteem Kennisbank
+     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
+     ============================================================ -->
+
 # Bekende Bugs & Workarounds
 > Beheerder: data-grinder · Laatste update: 2026-06-08 · Bron: wow-oudedoos
 
@@ -68,3 +74,10 @@
 - **VERIFIED** — Meerdere bronnen, zelf getest
 - **PROBABLE** — Één betrouwbare bron
 - **UNVERIFIED** — Niet getest, gebruik met voorzichtigheid
+
+<!-- ============================================================
+     File    : docs/knowledge/known-bugs.md
+     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
+     Status  : New
+     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     ============================================================ -->

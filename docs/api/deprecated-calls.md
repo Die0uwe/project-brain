@@ -1,3 +1,9 @@
+<!-- ============================================================
+     Project Brain — DieOuwe Ecosysteem Kennisbank
+     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
+     ============================================================ -->
+
 # Deprecated & Verboden API Calls
 > Build target: 12.0.5.67314 (Midnight) · Interface: 120005 · Beheerder: data-grinder
 
@@ -67,3 +73,10 @@ local worldX, worldY = C_Map.GetWorldPosFromMapPos(mapID, pos)
 | `C_Timer` | Timers en tickers |
 | `C_Container` | Bag/item containers |
 | `MenuUtil` | Context menus |
+
+<!-- ============================================================
+     File    : docs/api/deprecated-calls.md
+     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
+     Status  : New
+     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     ============================================================ -->

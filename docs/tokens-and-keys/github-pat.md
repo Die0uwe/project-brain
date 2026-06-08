@@ -1,3 +1,9 @@
+<!-- ============================================================
+     Project Brain — DieOuwe Ecosysteem Kennisbank
+     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
+     ============================================================ -->
+
 # GitHub Personal Access Token (PAT) — Hoe te verkrijgen
 > Beheerder: wow-brain-manager · Nooit echte tokens opslaan in dit bestand
 
@@ -68,3 +74,10 @@ In de workflow yml dan: `${{ secrets.GH_TOKEN }}`
 - ✅ Altijd via omgevingsvariabele (`export GH_TOKEN=...`)
 - ✅ Token verlopen? Nieuwe aanmaken via bovenstaande stappen
 - ✅ Compromised? Onmiddellijk intrekken via github.com/settings/tokens
+
+<!-- ============================================================
+     File    : docs/tokens-and-keys/github-pat.md
+     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
+     Status  : New
+     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     ============================================================ -->

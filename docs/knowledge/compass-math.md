@@ -1,3 +1,9 @@
+<!-- ============================================================
+     Project Brain — DieOuwe Ecosysteem Kennisbank
+     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
+     ============================================================ -->
+
 # Kompas Wiskunde — De Heilige Formule
 > Status: VERIFIED · Versie: V3.6 geverifieerd · Beheerder: data-grinder
 
@@ -80,3 +86,10 @@ local playerMapPos = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"
 | Naald 90° gedraaid | TGA staat niet North-up | Roteer TGA bestand zelf |
 | Naald springt | `%` modulo ontbreekt | Altijd `% (math.pi * 2)` na berekening |
 | Nil errors | `C_Map` call zonder pcall | Wikkel in `pcall()` |
+
+<!-- ============================================================
+     File    : docs/knowledge/compass-math.md
+     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
+     Status  : New
+     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     ============================================================ -->

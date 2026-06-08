@@ -1,3 +1,9 @@
+<!-- ============================================================
+     Project Brain — DieOuwe Ecosysteem Kennisbank
+     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
+     ============================================================ -->
+
 # Skill Register — DieOuwe Ecosysteem
 > Versie: 1.0.0 · Datum: 2026-06-08 · Beheerder: wow-personeelsbeleid
 
@@ -127,3 +133,10 @@ wow-bigboss-orchestrator  (commandopost v2.0.0)
 |---|---|
 | 2026-06-08 | Initieel register aangemaakt |
 | 2026-06-08 | wow-brain-manager toegevoegd als nieuwe skill |
+
+<!-- ============================================================
+     File    : docs/skills/skill-register.md
+     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
+     Status  : New
+     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     ============================================================ -->

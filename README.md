@@ -1,3 +1,9 @@
+<!-- ============================================================
+     Project Brain — DieOuwe Ecosysteem Kennisbank
+     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
+     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
+     ============================================================ -->
+
 # 🧠 DieOuwe Project Brain
 
 > Centrale kennisbank voor het DieOuwe ecosysteem — WoW Addons, CurseBot, Slayer Alliance WordPress
