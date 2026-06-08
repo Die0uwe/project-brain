@@ -1,0 +1,31 @@
+name: Validate Knowledge Base
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan op secrets
+        run: |
+          if grep -r "ghp_[A-Za-z0-9]" --include="*.md" .; then
+            echo "❌ GitHub PAT token gevonden!" && exit 1
+          fi
+          echo "✅ Geen secrets gevonden"
+
+      - name: Controleer CONTEXT.md
+        run: |
+          [ -f "CONTEXT.md" ] && echo "✅ CONTEXT.md aanwezig" || (echo "❌ CONTEXT.md ontbreekt!" && exit 1)
+
+      - name: Controleer verplichte docs
+        run: |
+          for f in "docs/knowledge/known-bugs.md" "docs/knowledge/compass-math.md" \
+                   "docs/api/deprecated-calls.md" "docs/skills/skill-register.md"; do
+            [ -f "$f" ] && echo "✅ $f" || (echo "❌ Ontbreekt: $f" && exit 1)
+          done
