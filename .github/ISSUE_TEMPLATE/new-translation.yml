@@ -1,0 +1,63 @@
+name: "🌐 Translation"
+description: "Contribute a translation or report a translation error"
+title: "[i18n] "
+labels: ["translation", "needs-review"]
+body:
+  - type: dropdown
+    id: action
+    attributes:
+      label: "What are you doing?"
+      options:
+        - Adding a new translation
+        - Fixing an existing translation
+        - Starting a new language
+        - Reporting a translation error
+    validations:
+      required: true
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: "Language"
+      options:
+        - English (en)
+        - Deutsch (de)
+        - Français (fr)
+        - Español (es)
+        - Português (pt)
+        - 中文 (zh)
+        - 한국어 (ko)
+        - Русский (ru)
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: input
+    id: document
+    attributes:
+      label: "Document(s)"
+      placeholder: "e.g. docs/knowledge/known-bugs.md"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      placeholder: "What are you translating / fixing / adding?"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: "Translation rules confirmed"
+      options:
+        - label: "I have NOT translated WoW API function names"
+          required: true
+        - label: "I have NOT translated Lua code"
+          required: true
+        - label: "I have NOT translated addon names (DelveTracker, CurseBot, etc.)"
+          required: true
+        - label: "I have added the translation header with link to original"
+          required: true

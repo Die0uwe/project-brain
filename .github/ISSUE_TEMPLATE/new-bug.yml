@@ -1,0 +1,61 @@
+name: "🐛 Bug / Workaround"
+description: "Report a known WoW addon bug or API issue with a workaround"
+title: "[BUG] "
+labels: ["bug", "needs-review"]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Category"
+      options:
+        - Critical crash (addon won't load)
+        - Deprecated API call
+        - Taint / InCombatLockdown issue
+        - Frame / UI bug
+        - CurseBot (Python)
+        - WordPress (Slayer Alliance)
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: wow-version
+    attributes:
+      label: "WoW version"
+      placeholder: "e.g. 12.0.5.67314"
+      value: "12.0.5.67314"
+    validations:
+      required: true
+
+  - type: textarea
+    id: symptom
+    attributes:
+      label: "Symptom"
+      placeholder: "What does the user see? What breaks?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: "Steps to reproduce (if known)"
+      placeholder: "1. Do X\n2. Do Y\n3. Bug occurs"
+
+  - type: textarea
+    id: fix
+    attributes:
+      label: "Workaround / Fix"
+      placeholder: "Code snippet or description of the fix"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reliability
+    attributes:
+      label: "Reliability"
+      options:
+        - VERIFIED (reproduced, fix confirmed)
+        - PROBABLE (likely fix, not fully tested)
+        - UNVERIFIED (community report, not tested)
+    validations:
+      required: true

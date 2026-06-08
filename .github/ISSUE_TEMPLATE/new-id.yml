@@ -1,0 +1,69 @@
+name: "🆕 New ID submission"
+description: "Submit a verified WoW ID (mapID, questID, currencyID, spellID, etc.)"
+title: "[ID] "
+labels: ["new-data", "needs-review"]
+body:
+  - type: dropdown
+    id: id-type
+    attributes:
+      label: "ID type"
+      options:
+        - mapID / uiMapID
+        - questID
+        - currencyID
+        - spellID
+        - itemID
+        - NPC ID
+        - other
+    validations:
+      required: true
+
+  - type: input
+    id: id-value
+    attributes:
+      label: "ID value"
+      placeholder: "e.g. 3391"
+    validations:
+      required: true
+
+  - type: input
+    id: id-name
+    attributes:
+      label: "Name"
+      placeholder: "e.g. Dawncrest Shard"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reliability
+    attributes:
+      label: "Reliability"
+      options:
+        - VERIFIED (tested in-game, multiple sources)
+        - PROBABLE (one reliable source)
+        - UNVERIFIED (not tested yet)
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: "Source"
+      placeholder: "e.g. wowhead.com/currency=3391 or 'own test 2026-06'"
+    validations:
+      required: true
+
+  - type: input
+    id: wow-version
+    attributes:
+      label: "WoW version"
+      placeholder: "e.g. 12.0.5.67314"
+      value: "12.0.5.67314"
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: "Additional info (optional)"
+      placeholder: "Zone, coordinates, related IDs, context..."
