@@ -54,3 +54,11 @@
      Status  : New
      DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
      ============================================================ -->
+
+## Sessie 2026-06-12 (v3.0.9→v3.1.9)
+- Regressie hersteld: race-systeem, admin panel, warband stats herbouwd
+- Fase 1+2 stappenplan compleet · 22 plugins geregistreerd
+- Nieuwe lessen: SavedVariables init-timing, ipairs-nil valkuil,
+  GetGuildRosterMOTD protected, frames-zijn-tables Hide-loop
+- Midnight security model gedocumenteerd (zie midnight-security-model.md)
+- Race icons definitief (zie race-icons-definitief.md)
