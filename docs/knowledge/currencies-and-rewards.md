@@ -73,3 +73,12 @@ Zie ook `docs/knowledge/maps-and-zones.md` voor bank locaties.
      Status  : New
      DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
      ============================================================ -->
+
+## Midnight 12.x Currencies (volledig, 2026-06-13)
+Zie: midnight-currency-ids.md (volledig overzicht)
+Korte samenvatting:
+- Dawncrest: 3383(Adv)/3341(Vet)/3343(Champ)/3345(Hero)/3347(Myth)
+- Valorstones: 3008 · Dawnlight Manaflux: 3378 · Shard of Dundun: 3376
+- Coffer Keys: 3028 · Shards: 3310 · Delver's Journey: 3318
+- Voidlight Marl: 3316 · Brimming Arcana: 3379 · Luminous Dust: 3385
+- Remnant of Anguish: 3392 · Undercoin: 2803 · Unalloyed Abundance: 3377

@@ -123,3 +123,40 @@ end)
 
 ### SA Kleur constanten in core (geverifieerd BugSack locals):
 SA_GOLD="|cffccaa00" SA_GREY="|cff887799" SA_BLUE="|cff00ccff" C_2002="Fonts\2002.ttf"
+
+## Bugs opgelost in sessie 2026-06-13
+
+### goto bestaat niet in WoW Lua 5.1
+Symptoom: addon laadt niet of crasht stil
+Oorzaak: goto/::label:: is Lua 5.2 syntax
+Fix: if/else wrapper gebruiken
+
+### Pool parent bug
+Symptoom: Currency tiles onzichtbaar
+Oorzaak: rosterCardPool en currencyPools hadden dezelfde parent (Tab4)
+Fix: aparte InitRosterPools() en InitCurrPools() met juiste parent
+
+### rows[i]=card crash
+Symptoom: table index is nil
+Oorzaak: for _,key (i is nu _) maar rows[i] gebruikt nog i
+Fix: rows[visIdx]=card
+
+### Python literal LF in Lua string
+Symptoom: LUA_WARNING unfinished string near '"'
+Oorzaak: Python schrijft echte LF byte in Lua string literal
+Fix: binary replace of handmatige escape check
+
+### hScroll onzichtbaar na pool acquire
+Symptoom: Currency tiles leeg/onzichtbaar
+Oorzaak: pool:ReleaseAll() doet Hide(), niemand roept Show() aan
+Fix: hScroll:Show() + hContent:Show() na Acquire
+
+### C_RestrictedActions methods bestaan niet
+Symptoom: error in Security tab Debugger
+Oorzaak: GetAddOnRestrictionState is niet publiek in Midnight 12.x
+Fix: label veranderd naar "(niet publiek in 12.x)"
+
+### DB duplicaten spatie in realm
+Symptoom: dubbele karakters in roster
+Oorzaak: "Defias Brotherhood" (spatie) vs "DefiasBrotherhood" (geen spatie) als key
+Fix: /wt cleanup normaliseert en verwijdert duplicaten
