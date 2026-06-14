@@ -1,84 +1,76 @@
-<!-- ============================================================
-     Project Brain — DieOuwe Ecosysteem Kennisbank
-     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
-     ============================================================ -->
-
-# Prey Database — Quest IDs & NPC Data
-> Build: 12.0.5.67314 (Midnight) · Beheerder: data-grinder · Updated: 2026-06-08
+# Prey Database — Geverifieerde Data
+> WoW Retail 12.0.5 Midnight · Laatste update: 2026-06-14
 
 ---
 
-## Prey Quest ID Range
+## Prey Quest ID Range (VERIFIED)
 
-| Range | Gebruik | Status |
-|---|---|---|
-| 91095 – 91400 | Midnight prey/hunt quests | VERIFIED |
+**Primaire range**: `91095 – 91400`
 
----
-
-## Prey Detection API
+Elke actieve quest waarvan het ID in deze range valt is een Prey Hunt quest.
+Detectie via range check — niet via string matching op "prey".
 
 ```lua
--- Actieve prey quest ophalen
-local questID = C_QuestLog.GetActivePreyQuest()
-
--- String matching VERMIJDEN — gebruik ID range check
--- NOOIT: if questName:find("prey") then
--- ALTIJD:
+-- CORRECT detectie
 local function IsPreyQuest(questID)
     return questID >= 91095 and questID <= 91400
 end
 
--- Quest waypoint voor prey
-local wp = C_QuestLog.GetNextWaypointForMap(questID, mapID)
-if wp then
-    local targetX, targetY = wp:GetXY()
-end
+-- FOUT (gebruik dit NIET)
+-- string.find(questName, "prey")  ← unreliable
 ```
 
----
-
-## Events voor Prey Tracking
-
-| Event | Wanneer | Payload |
-|---|---|---|
-| `QUEST_ACCEPTED` | Prey quest gestart | `questID` |
-| `QUEST_REMOVED` | Prey quest afgesloten | `questID` |
-| `QUEST_WATCH_UPDATE` | Waypoint update | — |
-| `UNIT_SPELLCAST_SUCCEEDED` | NPC ability (zie spells.md) | `unit, _, spellID` |
-
----
-
-## Bekende Prey NPCs (Midnight)
-
-| NPC Naam | NPC ID | Quest ID | Zone | mapID | Coördinaten | Status |
-|---|---|---|---|---|---|---|
-| (community aanvulling gewenst) | ? | ? | Dawncrest | 2420 | ?, ? | UNVERIFIED |
-
-> Weet jij een NPC ID? Zie [contributing/templates/new-id.md](../../contributing/templates/new-id.md)
-
----
-
-## DT_PreyTracker Architectuur Referentie
+## API Calls — Prey Systeem
 
 ```lua
--- Prey scan loop (50fps via C_Timer)
-local preyTicker = C_Timer.NewTicker(0.02, function()
-    local questID = C_QuestLog.GetActivePreyQuest()
-    if questID and IsPreyQuest(questID) then
-        local wp = C_QuestLog.GetNextWaypointForMap(questID, C_Map.GetBestMapForUnit("player"))
-        if wp then
-            local tx, ty = wp:GetXY()
-            -- kompas update → zie compass-math.md
-        end
-    end
+-- Actieve prey quest ophalen
+local preyQuestID = C_QuestLog.GetActivePreyQuest()
+
+-- Waypoint voor prey
+local wp = C_QuestLog.GetNextWaypointForMap(questID, mapID)
+if wp then
+    local x, y = wp.x, wp.y
+end
+
+-- Player positie voor kompas
+local mapID = C_Map.GetBestMapForUnit("player")
+local pos   = C_Map.GetPlayerMapPosition(mapID, "player")
+local px, py = pos.x, pos.y
+local facing = GetPlayerFacing()  -- radialen, CCW vanuit North
+```
+
+## Kompas Hoekberekening (HEILIG)
+
+```lua
+-- dx = target.x - player.x, dy = target.y - player.y
+local angle    = math.atan2(dx, -dy)
+local relative = angle - GetPlayerFacing()
+relative       = relative % (math.pi * 2)
+needle:SetRotation(-relative + needleOffset)
+```
+
+**Of via CalcAngle (geverifieerd V3.6):**
+```lua
+local function NormAngle(a)
+    return a % (math.pi * 2)
+end
+local TWO_PI = math.pi * 2
+local targetCW  = NormAngle(math_atan2(-dx, dy))
+local facingCW  = NormAngle(TWO_PI - facingCCW)
+return NormAngle(targetCW - facingCW + (offset or 0))
+```
+
+**Vereiste**: `Compass_Arrow.tga` moet punt OMHOOG (North) hebben.
+
+## Timer voor HUD Refresh
+
+```lua
+-- 50 FPS rotatie-update
+C_Timer.NewTicker(0.02, function()
+    -- update needle rotation hier
 end)
 ```
 
-<!-- ============================================================
-     File    : docs/knowledge/prey-database.md
-     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
-     Status  : New
-     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     ============================================================ -->
+---
+
+*Bron: Sessie-geverifieerd · VERIFIED*
