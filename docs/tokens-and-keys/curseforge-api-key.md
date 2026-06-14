@@ -1,73 +1,48 @@
-<!-- ============================================================
-     Project Brain — DieOuwe Ecosysteem Kennisbank
-     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
-     ============================================================ -->
-
-# CurseForge API Key — Hoe te verkrijgen
-> Beheerder: wow-brain-manager · Nooit echte keys opslaan in dit bestand
+# CurseForge API Key — Aanmaak Instructies
+> HOE je de key aanmaakt · NOOIT echte keys hier opslaan
 
 ---
 
-## CurseBot Config (geen secrets)
+## Stappenplan
 
-| Instelling | Waarde |
-|---|---|
-| CF Author ID | 1417946 |
-| CF Slug | dieouwe |
-| Keyring naam | CurseBot-SlayerAlliance |
-
----
-
-## API Key aanmaken op CurseForge
-
-```
-1. Ga naar console.curseforge.com
-2. Log in met je CurseForge account
-3. Klik op "My API Keys" of "Create API Key"
-4. Geef een naam: bijv. "CurseBot-SlayerAlliance"
-5. Kopieer de key ($2a$... formaat)
-   ⚠️ Sla op in je password manager — niet in code!
-```
+1. Ga naar `curseforge.com` → log in
+2. Klik op je profielnaam rechtsboven → **API Keys**
+3. Klik **Generate API Key**
+4. Geef een naam (bijv. `CurseBot-SlayerAlliance`)
+5. Kopieer de key
 
 ---
 
-## Gebruik in CurseBot
-
-De key wordt opgeslagen via `cursebot-security` skill met Fernet encryptie.
-Nooit plaintext in `config.py`, `.env`, of enig ander bestand in de repo.
+## CurseBot Config (NIET de echte key)
 
 ```python
-# Ophalen via key_manager (cursebot-security pattern)
-from bot.services.key_manager import KeyManager
-km = KeyManager()
-cf_key = km.get_key("curseforge_api_key")
+# In CurseBot — key wordt opgeslagen via key_manager.py
+# Nooit hardcoden, altijd via keyring of encrypted config
+
+KEYRING_SERVICE = "CurseBot-SlayerAlliance"
+KEYRING_USERNAME = "curseforge_api_key"
+
+# key_manager.py haalt de key op:
+import keyring
+key = keyring.get_password(KEYRING_SERVICE, KEYRING_USERNAME)
 ```
 
----
+## Bekende Config Data (GEEN geheimen)
 
-## Endpoints die we gebruiken
-
-| Endpoint | Gebruik |
+| Waarde | Data |
 |---|---|
-| `GET /v1/mods/{authorId}/files` | Addon releases ophalen |
-| `GET /v1/mods/{modId}` | Addon info |
-| `GET /v1/mods/{modId}/files/{fileId}` | Specifieke release |
-
-**Base URL**: `https://api.curseforge.com`
-**Header**: `x-api-key: {jouw_key}`
+| Author ID | `1417946` |
+| Slug | `dieouwe` |
+| Keyring service | `CurseBot-SlayerAlliance` |
 
 ---
 
-## Rate Limits
+## Veiligheidsregels
 
-- 100 requests per uur per key (gratis tier)
-- Bij 429 response: exponential backoff (0.5s, 1s, 2s, 4s)
-- Zie `docs/knowledge/known-bugs.md` voor de backoff implementatie
+- Sla de echte key **ALLEEN** op via `keyring` of Fernet-encrypted config
+- Nooit in `.env` bestanden committen
+- Nooit in code hardcoden
 
-<!-- ============================================================
-     File    : docs/tokens-and-keys/curseforge-api-key.md
-     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
-     Status  : New
-     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     ============================================================ -->
+---
+
+*Beheerd door cursebot-security + wow-brain-manager*
