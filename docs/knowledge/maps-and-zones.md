@@ -1,67 +1,57 @@
-<!-- ============================================================
-     Project Brain — DieOuwe Ecosysteem Kennisbank
-     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
-     ============================================================ -->
-
-# Maps & Zones — Geverifieerde MapIDs
-> Build: 12.0.5.67314 (Midnight) · Beheerder: data-grinder · Updated: 2026-06-08
+# Maps & Zones — Geverifieerde Data
+> WoW Retail 12.0.5 Midnight · Laatste update: 2026-06-14
 
 ---
 
-## Midnight Zones (12.0.x)
+## Midnight Zones
 
-| Zone naam | mapID | uiMapID | Type | Status | Bron |
-|---|---|---|---|---|---|
-| Dawncrest | 2420 | 2420 | Zone | PROBABLE | wow-oudedoos |
-| Midnight Hub (TBD) | ? | ? | City | UNVERIFIED | datamine |
+> **Status**: Gedeeltelijk geverifieerd — uitbreiden per sessie
 
----
-
-## Portalen & Entry Points
-
-| Van | Naar | Type | Coördinaten (van) | Status |
-|---|---|---|---|---|
-| Oribos | Dawncrest | Portal | TBD | UNVERIFIED |
-
----
-
-## WoW Bag / Bank mapIDs
-
-| Type | ID Range | Gebruik |
+| Zone | MapID | Notities |
 |---|---|---|
-| Player bags | 0 – 4 | C_Container iteratie |
-| Warband Bank | 12 – 16 | WarbankBuddy ME |
+| Dawncrest (hoofd) | TBD | Midnight hoofdzone |
+| Dawncrest Hub | TBD | Centrale hub/portal zone |
+
+*MapIDs toevoegen zodra geverifieerd via in-game `C_Map.GetBestMapForUnit("player")`*
 
 ---
 
-## API: Positie ophalen
+## API Gebruik
 
 ```lua
--- Speler positie op huidige map
+-- Huidige map van speler
 local mapID = C_Map.GetBestMapForUnit("player")
-local pos = C_Map.GetPlayerMapPosition(mapID, "player")
-if pos then
-    local x, y = pos:GetXY()
-end
 
--- Cross-zone wereldcoördinaten
-local worldX, worldY = C_Map.GetWorldPosFromMapPos(mapID, {x = mapX, y = mapY})
+-- Map info
+local info = C_Map.GetMapInfo(mapID)
+-- info.name         → zone naam
+-- info.mapType      → Enum.UIMapType (World/Continent/Zone/Dungeon/etc)
+-- info.parentMapID  → parent zone
 
--- MapID van een zone op naam (via uiMapID)
-local mapInfo = C_Map.GetMapInfo(uiMapID)
+-- World coordinates
+local wx, wy = C_Map.GetWorldPosFromMapPos(mapID, {x=0.5, y=0.5})
+```
+
+## Zone Entry Detectie
+
+```lua
+-- Event voor zone wisseling
+frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+frame:RegisterEvent("ZONE_CHANGED")
+frame:RegisterEvent("ZONE_CHANGED_INDOORS")
+
+frame:SetScript("OnEvent", function(self, event)
+    local mapID = C_Map.GetBestMapForUnit("player")
+    -- logica voor nieuwe zone
+end)
 ```
 
 ---
 
-## Betrouwbaarheidslegenda
-- **VERIFIED** — Meerdere bronnen, zelf getest
-- **PROBABLE** — Één betrouwbare bron
-- **UNVERIFIED** — Community aanvulling gewenst
+## Portalen & Routing
 
-<!-- ============================================================
-     File    : docs/knowledge/maps-and-zones.md
-     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
-     Status  : New
-     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     ============================================================ -->
+> Uitbreiden zodra Midnight portaal-coördinaten geverifieerd zijn via in-game testing.
+
+---
+
+*Beheerd door data-grinder · Gedeeltelijk VERIFIED — uitbreiden*
