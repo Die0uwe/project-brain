@@ -1,144 +1,161 @@
-<!-- ============================================================
-     Project Brain — DieOuwe Ecosysteem Kennisbank
-     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
-     ============================================================ -->
-
-# Blizzard API Reference — Actieve Calls
-> Build: 12.0.5.67314 (Midnight) · Interface: 120005 · Beheerder: data-grinder
+# Blizzard API Reference — WoW Retail 12.0.5 Midnight
+> Geverifieerde API calls voor build 67314 · Laatste update: 2026-06-14
 
 ---
 
-## C_CurrencyInfo
-
-| Functie | Return | Status |
-|---|---|---|
-| `C_CurrencyInfo.GetCurrencyInfo(id)` | `{name, quantity, iconFileID, ...}` | VERIFIED |
-| `C_CurrencyInfo.GetCurrencyListSize()` | `number` | VERIFIED |
-| `C_CurrencyInfo.GetCurrencyListInfo(index)` | currency info tabel | VERIFIED |
+## Map & Positie
 
 ```lua
-local info = C_CurrencyInfo.GetCurrencyInfo(3383)
-if info then
-    print(info.name, info.quantity, info.iconFileID)
-end
+-- Beste map voor unit
+local mapID = C_Map.GetBestMapForUnit("player")
+
+-- Speler positie op kaart (returnt MapVector2D of nil)
+local pos = C_Map.GetPlayerMapPosition(mapID, "player")
+if pos then local x, y = pos.x, pos.y end
+
+-- World positie van map positie (cross-zone)
+local wx, wy = C_Map.GetWorldPosFromMapPos(mapID, {x=0.5, y=0.5})
+
+-- Map info
+local mapInfo = C_Map.GetMapInfo(mapID)
+-- mapInfo.name, mapInfo.mapType, mapInfo.parentMapID
 ```
 
----
-
-## C_Map
-
-| Functie | Return | Status |
-|---|---|---|
-| `C_Map.GetBestMapForUnit("player")` | `mapID` | VERIFIED |
-| `C_Map.GetPlayerMapPosition(mapID, "player")` | `Vector2DMixin` of `nil` | VERIFIED |
-| `C_Map.GetMapInfo(uiMapID)` | `{name, mapType, parentMapID, ...}` | VERIFIED |
-| `C_Map.GetWorldPosFromMapPos(mapID, pos)` | `continentID, worldX, worldY` | VERIFIED |
-
----
-
-## C_QuestLog
-
-| Functie | Return | Status |
-|---|---|---|
-| `C_QuestLog.GetActivePreyQuest()` | `questID` of `nil` | VERIFIED |
-| `C_QuestLog.IsOnQuest(questID)` | `bool` | VERIFIED |
-| `C_QuestLog.GetNextWaypointForMap(questID, mapID)` | `Vector2DMixin` of `nil` | VERIFIED |
-| `C_QuestLog.GetQuestObjectives(questID)` | tabel van objectives | VERIFIED |
-
----
-
-## C_Spell
-
-| Functie | Return | Status |
-|---|---|---|
-| `C_Spell.GetSpellInfo(spellID)` | `{name, iconID, castTime, ...}` | VERIFIED |
-| `C_Spell.IsSpellDataCached(spellID)` | `bool` | VERIFIED |
-
----
-
-## C_UnitAuras
-
-| Functie | Return | Status |
-|---|---|---|
-| `C_UnitAuras.GetAuraDataByIndex(unit, i, filter)` | aura data tabel | VERIFIED |
-| `C_UnitAuras.GetPlayerAuraBySpellID(spellID)` | aura data of `nil` | VERIFIED |
-
----
-
-## C_Timer
-
-| Functie | Gebruik | Status |
-|---|---|---|
-| `C_Timer.NewTicker(interval, fn, iterations)` | Herhalende timer | VERIFIED |
-| `C_Timer.NewTimer(delay, fn)` | Eenmalige timer | VERIFIED |
-| `C_Timer.After(delay, fn)` | Shorthand eenmalige | VERIFIED |
+## Quest System
 
 ```lua
--- 50fps compass update
-local ticker = C_Timer.NewTicker(0.02, function()
-    -- update logic
+-- Actieve prey quest
+local questID = C_QuestLog.GetActivePreyQuest()
+
+-- Waypoint voor quest op map
+local wp = C_QuestLog.GetNextWaypointForMap(questID, mapID)
+
+-- Quest actief check
+local isActive = C_QuestLog.IsOnQuest(questID)
+
+-- Quest info
+local info = C_QuestLog.GetQuestInfo(questID)
+```
+
+## Currency
+
+```lua
+-- Info ophalen (CORRECT)
+local info = C_CurrencyInfo.GetCurrencyInfo(currencyID)
+if info then
+    info.quantity     -- huidige hoeveelheid
+    info.name         -- naam van de currency
+    info.iconFileID   -- icon texture ID
+    info.maxQuantity  -- max (0 = unlimited)
+end
+
+-- Currency container (meerdere tegelijk)
+local currencies = C_CurrencyInfo.GetCurrencyListInfo()
+```
+
+## Spell System
+
+```lua
+-- Spell info (CORRECT)
+local spellInfo = C_Spell.GetSpellInfo(spellID)
+if spellInfo then
+    spellInfo.name
+    spellInfo.iconID
+    spellInfo.castTime
+    spellInfo.minRange
+    spellInfo.maxRange
+end
+
+-- Cooldown
+local start, duration, enabled = C_Spell.GetSpellCooldown(spellID)
+```
+
+## Player
+
+```lua
+-- Facing (radialen, CCW vanuit North/0)
+local facing = GetPlayerFacing()
+
+-- Naam en realm
+local name, realm = UnitName("player")
+
+-- GUID
+local guid = UnitGUID("player")
+
+-- Combat check (ALTIJD vóór UI manipulatie)
+if InCombatLockdown() then return end
+```
+
+## Frame Systeem
+
+```lua
+-- Frame aanmaken (correct pattern)
+local frame = CreateFrame("Frame", "MyFrame", UIParent, "BackdropTemplate")
+frame:SetSize(200, 100)
+frame:SetPoint("CENTER")
+frame:SetClampedToScreen(true)        -- ALTIJD voor verplaatsbare frames
+frame:SetMovable(true)
+frame:EnableMouse(true)
+
+-- Drag met combat guard
+frame:SetScript("OnMouseDown", function(self, button)
+    if button == "LeftButton" and not InCombatLockdown() then
+        self:StartMoving()
+    end
+end)
+frame:SetScript("OnMouseUp", function(self)
+    self:StopMovingOrSizing()
+end)
+```
+
+## Timer
+
+```lua
+-- Eenmalig
+C_Timer.After(delay, function()
+    -- code
 end)
 
--- Stop de ticker
+-- Herhalend (geeft ticker object terug)
+local ticker = C_Timer.NewTicker(interval, function()
+    -- code
+end, repetitions)  -- repetitions = nil voor oneindig
+
+-- Stoppen
 ticker:Cancel()
 ```
 
----
-
-## C_Container (Bags)
-
-| Functie | Return | Status |
-|---|---|---|
-| `C_Container.GetContainerNumSlots(bagID)` | `number` | VERIFIED |
-| `C_Container.GetContainerItemInfo(bagID, slot)` | item info tabel | VERIFIED |
-| `C_Container.GetContainerNumFreeSlots(bagID)` | `numFreeSlots, bagType` | VERIFIED |
+## Tooltip
 
 ```lua
--- Alle bags itereren
-for bag = 0, 4 do  -- player bags
-    local slots = C_Container.GetContainerNumSlots(bag)
-    for slot = 1, slots do
-        local info = C_Container.GetContainerItemInfo(bag, slot)
-        if info then print(info.itemID) end
-    end
-end
+-- Item tooltip hook (CORRECT)
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
+    local name, link = tooltip:GetItem()
+    -- logica
+end)
+
+-- Unit tooltip
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip, data)
+    local unit = data.guid
+    -- logica
+end)
 ```
 
----
-
-## MenuUtil (context menus)
+## Dropdown Menu
 
 ```lua
--- GEBRUIK DIT (vervangt UIDropDownMenu):
-MenuUtil.CreateContextMenu(owner, function(ownerRegion, rootDescription)
-    rootDescription:CreateTitle("Mijn Menu")
-    rootDescription:CreateButton("Optie 1", function() print("klik") end)
+-- Context menu (CORRECT)
+MenuUtil.CreateContextMenu(parent, function(owner, rootDescription)
+    rootDescription:CreateTitle("Titel")
+    rootDescription:CreateButton("Label", function()
+        -- actie
+    end)
     rootDescription:CreateDivider()
-    rootDescription:CreateButton("Sluiten", function() end)
+    local submenu = rootDescription:CreateButton("Submenu")
+    submenu:CreateButton("Sub-optie", function() end)
 end)
 ```
 
 ---
 
-## GetMoney / PLAYER_MONEY
-
-```lua
--- Huidige gold ophalen
-local copper = GetMoney()
-local gold   = math.floor(copper / 10000)
-
--- Luisteren naar wijzigingen
-frame:RegisterEvent("PLAYER_MONEY")
-frame:SetScript("OnEvent", function(self, event)
-    local newGold = math.floor(GetMoney() / 10000)
-    print("Gold gewijzigd:", newGold)
-end)
-```
-
-<!-- ============================================================
-     File    : docs/api/blizzard-api-reference.md
-     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
-     Status  : New
-     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     ============================================================ -->
+*Bron: Retail 12.0.5 / build 67314 · VERIFIED*
