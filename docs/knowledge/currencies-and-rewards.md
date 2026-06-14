@@ -1,84 +1,48 @@
-<!-- ============================================================
-     Project Brain — DieOuwe Ecosysteem Kennisbank
-     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
-     ============================================================ -->
-
-# Currency IDs & Reward Systemen
-> Status: VERIFIED · Build: 12.0.5.67314 (Midnight) · Beheerder: data-grinder
+# Currencies & Rewards — Geverifieerde Data
+> WoW Retail 12.0.5 Midnight · Laatste update: 2026-06-14
 
 ---
 
-## Midnight (Dawncrest) Currencies
+## Dawncrest Valuta (VERIFIED)
 
-| Naam | ID | Status | Bron |
-|---|---|---|---|
-| Dawncrest 1 | 3383 | VERIFIED | BigBoss kennisbank |
-| Dawncrest 2 | 3341 | VERIFIED | BigBoss kennisbank |
-| Dawncrest 3 | 3343 | VERIFIED | BigBoss kennisbank |
-| Dawncrest 4 | 3345 | VERIFIED | BigBoss kennisbank |
-| Dawncrest 5 | 3347 | VERIFIED | BigBoss kennisbank |
-| Extra 1 | 3377 | VERIFIED | BigBoss kennisbank |
-| Extra 2 | 2803 | VERIFIED | BigBoss kennisbank |
-| Extra 3 | 3378 | VERIFIED | BigBoss kennisbank |
+| Currency ID | Naam | Notities |
+|---|---|---|
+| 3383 | Dawncrest (primair) | Hoofd Midnight valuta |
+| 3341 | Dawncrest variant | |
+| 3343 | Dawncrest variant | |
+| 3345 | Dawncrest variant | |
+| 3347 | Dawncrest variant | |
+| 3377 | Extra Midnight currency | |
+| 2803 | Extra currency | |
+| 3378 | Extra currency | |
 
----
-
-## Correcte API Call
+## API Gebruik
 
 ```lua
--- GEBRUIK DIT:
-local info = C_CurrencyInfo.GetCurrencyInfo(currencyID)
+-- CORRECT (Midnight 12.0.5)
+local info = C_CurrencyInfo.GetCurrencyInfo(3383)
 if info then
     local amount = info.quantity
     local name   = info.name
     local icon   = info.iconFileID
 end
 
--- NOOIT DIT (deprecated):
--- GetCurrencyInfo(currencyID)
+-- DEPRECATED (crasht)
+-- GetCurrencyInfo(3383)  ← gebruik NIET
 ```
-
----
 
 ## Bag IDs
 
 | Type | ID Range |
 |---|---|
 | Player bags | 0 – 4 |
-| Warband Bank | 12 – 16 |
+| Warband bank bags | 12 – 16 |
+
+## Notes
+
+- Altijd `pcall()` gebruiken rondom currency API calls
+- Dawncrest ID 3383 is de primaire voor DelveTracker display
 
 ---
 
-## WarbankBuddy ME — Bekende IDs
-
-Zie ook `docs/knowledge/maps-and-zones.md` voor bank locaties.
-
-| Functie | Implementatie |
-|---|---|
-| Warband gold ophalen | `GetMoney()` + `PLAYER_MONEY` event |
-| Bag iteratie | `for bag = 0, 4 do ... end` (player) |
-| Warband bag iteratie | `for bag = 12, 16 do ... end` |
-
----
-
-## Betrouwbaarheidslegenda
-- **VERIFIED** — Meerdere bronnen, zelf getest
-- **PROBABLE** — Één betrouwbare bron
-- **UNVERIFIED** — Niet getest
-
-<!-- ============================================================
-     File    : docs/knowledge/currencies-and-rewards.md
-     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
-     Status  : New
-     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     ============================================================ -->
-
-## Midnight 12.x Currencies (volledig, 2026-06-13)
-Zie: midnight-currency-ids.md (volledig overzicht)
-Korte samenvatting:
-- Dawncrest: 3383(Adv)/3341(Vet)/3343(Champ)/3345(Hero)/3347(Myth)
-- Valorstones: 3008 · Dawnlight Manaflux: 3378 · Shard of Dundun: 3376
-- Coffer Keys: 3028 · Shards: 3310 · Delver's Journey: 3318
-- Voidlight Marl: 3316 · Brimming Arcana: 3379 · Luminous Dust: 3385
-- Remnant of Anguish: 3392 · Undercoin: 2803 · Unalloyed Abundance: 3377
+*Bron: Sessie-geverifieerd · VERIFIED*
