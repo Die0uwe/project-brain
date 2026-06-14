@@ -1,82 +1,93 @@
-<!-- ============================================================
-     Project Brain — DieOuwe Ecosysteem Kennisbank
-     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
-     ============================================================ -->
-
-# Deprecated & Verboden API Calls
-> Build target: 12.0.5.67314 (Midnight) · Interface: 120005 · Beheerder: data-grinder
+# Deprecated API Calls — WoW Retail 12.0.5 Midnight
+> Alle verwijderde of gewijzigde APIs · Laatste update: 2026-06-14
 
 ---
 
-## VERBODEN — Veroorzaken crashes of taint
+## Directe Vervangingen (VERIFIED)
 
-| Verboden call | Waarom | Vervanging |
+| Deprecated | Vervanger | Severity |
 |---|---|---|
-| `OptionsSliderTemplate` | Stille crash, blokkeert bestand | `MinimalSliderWithSteppers` |
-| `UIDropDownMenu_*` | Deprecated, taint issues | `MenuUtil.CreateContextMenu()` |
-| `EasyMenu()` | Deprecated | `MenuUtil.CreateContextMenu()` |
-| `getglobal("naam")` | Deprecated, nil return | `_G["naam"]` |
-| `OnTooltipSetItem` | Deprecated hook | `TooltipDataProcessor.AddTooltipPostCall` |
-| `Fonts\FRIZQT__.TTF` | Bestand bestaat niet in Midnight | `Fonts\2002.ttf` |
+| `GetCurrencyInfo(id)` | `C_CurrencyInfo.GetCurrencyInfo(id)` | CRASH |
+| `GetSpellInfo(id)` | `C_Spell.GetSpellInfo(id)` | CRASH |
+| `UIDropDownMenu_*` | `MenuUtil.CreateContextMenu()` | CRASH |
+| `EasyMenu()` | `MenuUtil.CreateContextMenu()` | CRASH |
+| `getglobal("name")` | `_G["name"]` | CRASH |
+| `OnTooltipSetItem` | `TooltipDataProcessor.AddTooltipPostCall` | SILENT |
+| `OptionsSliderTemplate` | Custom slider frame | CRASH |
+| `Fonts\FRIZQT__.TTF` | `Fonts\2002.ttf` | CRASH |
 
----
-
-## DEPRECATED — Werken niet meer, gebruik vervanging
-
-| Deprecated call | Status | Correcte vervanging |
-|---|---|---|
-| `GetCurrencyInfo(id)` | DEPRECATED 11.0+ | `C_CurrencyInfo.GetCurrencyInfo(id)` |
-| `GetSpellInfo(id)` | DEPRECATED 11.0+ | `C_Spell.GetSpellInfo(id)` |
-| `GetItemInfo(id)` | DEPRECATED | `C_Item.GetItemInfo(id)` |
-| `UnitAura(unit, i)` | DEPRECATED | `C_UnitAuras.GetAuraDataByIndex(unit, i, filter)` |
-| `OnUpdate` (polling) | VERMIJDEN | `C_Timer.NewTicker(interval, fn)` |
-
----
-
-## VERPLICHTE PATTERNS (altijd gebruiken)
+## OnUpdate → Timer
 
 ```lua
--- Bovenaan elk Lua bestand
-local addonName, addonTable = ...
-
--- Alle verplaatsbare frames
-frame:SetClampedToScreen(true)
-
--- Drag/move bescherming
-if InCombatLockdown() then return end
-
--- 50fps animaties
-local ticker = C_Timer.NewTicker(0.02, fn)
-
--- Crash-safe API aanroepen
-local ok, result = pcall(function()
-    return C_SomeNamespace.SomeCall(arg)
+-- DEPRECATED (performance + polling issues)
+frame:SetScript("OnUpdate", function(self, elapsed)
+    -- logica
 end)
 
--- Cross-zone coördinaten
-local worldX, worldY = C_Map.GetWorldPosFromMapPos(mapID, pos)
+-- CORRECT
+C_Timer.NewTicker(interval, function()
+    -- logica
+end)
+```
+
+## Tooltip Hook
+
+```lua
+-- DEPRECATED
+GameTooltip:SetScript("OnTooltipSetItem", function(tooltip)
+    -- logica
+end)
+
+-- CORRECT
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
+    -- logica
+end)
+```
+
+## Slider
+
+```lua
+-- DEPRECATED (stille crash — blokkeert volledig .lua bestand)
+-- <Slider name="$parentSlider" inherits="OptionsSliderTemplate"/>
+
+-- CORRECT — handmatig slider frame
+local slider = CreateFrame("Slider", "MySlider", parent, "BackdropTemplate")
+slider:SetMinMaxValues(0, 100)
+slider:SetValue(50)
+slider:SetWidth(200)
+slider:SetHeight(16)
+-- Voeg handmatig thumb toe
+```
+
+## UIDropDownMenu
+
+```lua
+-- DEPRECATED (verwijderd in Dragonflight, weg in Midnight)
+-- UIDropDownMenu_Initialize, UIDropDownMenu_AddButton, etc.
+
+-- CORRECT
+local menu = MenuUtil.CreateContextMenu(parent, function(owner, rootDescription)
+    rootDescription:CreateTitle("Mijn Menu")
+    rootDescription:CreateButton("Optie 1", function() end)
+    rootDescription:CreateDivider()
+    rootDescription:CreateButton("Optie 2", function() end)
+end)
+```
+
+## Font Pad
+
+```lua
+-- NIET MEER BESCHIKBAAR
+-- "Fonts\\FRIZQT__.TTF"
+
+-- GEBRUIK
+local font = CreateFont("MyFont")
+font:SetFont("Fonts\\2002.ttf", 12, "OUTLINE")
+
+-- Of direct op frame
+myText:SetFont("Fonts\\2002.ttf", 12, "OUTLINE")
 ```
 
 ---
 
-## C_Namespaces die actief zijn in 12.0.5
-
-| Namespace | Gebruik |
-|---|---|
-| `C_CurrencyInfo` | Valuta queries |
-| `C_Spell` | Spell data |
-| `C_Item` | Item data |
-| `C_Map` | Kaart en positie |
-| `C_QuestLog` | Quest data, prey quests |
-| `C_UnitAuras` | Aura/buff tracking |
-| `C_Timer` | Timers en tickers |
-| `C_Container` | Bag/item containers |
-| `MenuUtil` | Context menus |
-
-<!-- ============================================================
-     File    : docs/api/deprecated-calls.md
-     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
-     Status  : New
-     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     ============================================================ -->
+*Bron: Sessie-geverifieerd build 67314 · VERIFIED*
