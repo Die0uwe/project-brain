@@ -1,95 +1,106 @@
-<!-- ============================================================
-     Project Brain — DieOuwe Ecosysteem Kennisbank
-     © 2026 DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     Licentie: CC BY-SA 4.0 — Vrij te delen met bronvermelding
-     ============================================================ -->
-
-# Kompas Wiskunde — De Heilige Formule
-> Status: VERIFIED · Versie: V3.6 geverifieerd · Beheerder: data-grinder
+# Compass Math — Hoekberekening DelveTracker
+> Geverifieerd V3.6 · Laatste update: 2026-06-14
 
 ---
 
-## ⚠️ HEILIG — Nooit wijzigen zonder BigBoss goedkeuring
+## De Heilige Formule
 
 ```lua
--- Methode A (standaard)
-local angle = math.atan2(dx, -dy)           -- dx = tx-px, dy = ty-py
+-- INPUTS:
+-- dx = target.x - player.x  (map coords, [0,1] range)
+-- dy = target.y - player.y
+-- GetPlayerFacing() = CCW radialen vanuit North
+
+local angle    = math.atan2(dx, -dy)    -- richting naar target (CW vanuit North)
 local relative = angle - GetPlayerFacing()
-relative = relative % (math.pi * 2)
+relative       = relative % (math.pi * 2)
 needle:SetRotation(-relative + needleOffset)
 ```
 
+**needleOffset** = 0 als de texture al pointing-up is.
+Als texture pointing-right is: `needleOffset = -math.pi/2`
+
+---
+
+## Alternatieve Formule (CalcAngle — ook geverifieerd)
+
 ```lua
--- Methode B (CalcAngle — geverifieerd V3.6)
+local TWO_PI = math.pi * 2
+
 local function NormAngle(a)
-    return a % (math.pi * 2)
+    return a % TWO_PI
 end
 
-local targetCW  = NormAngle(math_atan2(-dx, dy))
-local facingCCW = GetPlayerFacing()               -- WoW geeft CCW terug
-local facingCW  = NormAngle(TWO_PI - facingCCW)
-return NormAngle(targetCW - facingCW + (offset or 0))
+local function CalcAngle(px, py, tx, ty, facingCCW, offset)
+    local dx = tx - px
+    local dy = ty - py
+    local targetCW  = NormAngle(math.atan2(-dx, dy))
+    local facingCW  = NormAngle(TWO_PI - facingCCW)
+    return NormAngle(targetCW - facingCW + (offset or 0))
+end
+
+-- Gebruik:
+local angle = CalcAngle(pos.x, pos.y, target.x, target.y, GetPlayerFacing(), 0)
+needle:SetRotation(-angle)
 ```
 
 ---
 
-## Variabelen
+## Vereisten
 
-| Variabele | Betekenis |
-|---|---|
-| `dx` | `targetX - playerX` |
-| `dy` | `targetY - playerY` |
-| `GetPlayerFacing()` | Geeft CCW radialen terug (WoW intern) |
-| `needleOffset` | Compensatie voor TGA rotatie-startpunt |
-| `TWO_PI` | `math.pi * 2` (= 6.2831...) |
+1. **Compass_Arrow.tga** moet punt OMHOOG (North) hebben
+2. Update frequentie: `C_Timer.NewTicker(0.02, fn)` = 50 FPS
+3. Map coords ophalen via `C_Map.GetPlayerMapPosition()` (returnt nil buiten loaded map)
+4. Altijd nil-check op pos vóór berekening
 
 ---
 
-## TGA Vereiste
-
-```
-Compass_Arrow.tga punt moet OMHOOG staan (North = 0 graden)
-Elke andere oriëntatie breekt de naaldrichting.
-```
-
----
-
-## C_Timer voor 50fps animatie
+## Volledige Implementation Template
 
 ```lua
-local ticker = C_Timer.NewTicker(0.02, function()
-    -- compass update logic hier
-    local facing = GetPlayerFacing()
-    needle:SetRotation(CalcAngle(targetX, targetY) )
-end)
+local TICK = 0.02  -- 50 FPS
+
+local function UpdateCompass()
+    local mapID = C_Map.GetBestMapForUnit("player")
+    if not mapID then return end
+    
+    local pos = C_Map.GetPlayerMapPosition(mapID, "player")
+    if not pos then return end
+    
+    local target = GetCurrentPreyTarget(mapID)  -- eigen functie
+    if not target then
+        needle:Hide()
+        return
+    end
+    
+    local dx = target.x - pos.x
+    local dy = target.y - pos.y
+    
+    -- Afstand check (optioneel, vermijd jitter bij overlap)
+    if math.sqrt(dx*dx + dy*dy) < 0.001 then return end
+    
+    local angle    = math.atan2(dx, -dy)
+    local relative = angle - GetPlayerFacing()
+    relative       = relative % (math.pi * 2)
+    
+    needle:SetRotation(-relative)
+    needle:Show()
+end
+
+local compassTicker = C_Timer.NewTicker(TICK, UpdateCompass)
 ```
 
 ---
 
-## Coördinaten ophalen (cross-zone)
+## Veelgemaakte Fouten
 
-```lua
--- Cross-zone coördinaten
-local worldX, worldY = C_Map.GetWorldPosFromMapPos(mapID, {x = mapX, y = mapY})
-
--- Speler positie
-local playerMapPos = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player")
-```
-
----
-
-## Bekende valkuilen
-
-| Probleem | Oorzaak | Fix |
+| Fout | Symptoom | Fix |
 |---|---|---|
-| Naald altijd naar Noord | `GetPlayerFacing()` niet afgetrokken | Voeg `-GetPlayerFacing()` toe |
-| Naald 90° gedraaid | TGA staat niet North-up | Roteer TGA bestand zelf |
-| Naald springt | `%` modulo ontbreekt | Altijd `% (math.pi * 2)` na berekening |
-| Nil errors | `C_Map` call zonder pcall | Wikkel in `pcall()` |
+| `math.atan2(dy, dx)` i.p.v. `(dx, -dy)` | Naald wijst 90° of 180° verkeerd | Swap args |
+| Geen `% (math.pi * 2)` | Naald springt bij 0/2π grens | Modulo toevoegen |
+| Arrow texture pointing RIGHT | Naald altijd 90° fout | Gebruik texture pointing UP |
+| Geen nil-check op `pos` | Crash buiten map | `if not pos then return end` |
 
-<!-- ============================================================
-     File    : docs/knowledge/compass-math.md
-     Version : 1.0.0  Created: 2026-06-08  Updated: 2026-06-08
-     Status  : New
-     DieOuwe · www.dieouwe.nl · discord.gg/y8Pu5qsEbQ
-     ============================================================ -->
+---
+
+*Bron: Sessie-geverifieerd V3.6 · VERIFIED*
