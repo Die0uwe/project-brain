@@ -59,3 +59,27 @@ Admin panel code NOOIT vóór functie-definities!
 - Titel: `"v"..WT_VERSION` (nooit hardcoded)
 - C_RestrictedActions methods bestaan NIET publiek in 12.x → label "(niet publiek in 12.x)"
 - SecureActionButtonTemplate niet in _G → check altijd via CreateFrame inherits
+
+
+## v3.5.5 Lessen (2026-06-15)
+
+### Icon sheets
+- Zwarte achtergrond essentieel voor betrouwbare crop detectie
+- Brightness threshold 8 + max per kolom over volle rij hoogte
+- Crop boundaries voor 1467×1072 sheet: [440,619], [647,816], [848,1023], [1048,1217], [1248,1415]
+
+### Theme callbacks zonder plugin aanraken
+- Gebruik globale frame namen: `_G["DT_RegistryOpenBtn"]`, `_G["DT_MurlocBtn"]`
+- `DelveTrackerFrame.close` bereikbaar via `_G["DelveTrackerFrame"].close`
+- `C_Timer.After(2, ...)` nodig voor B-knop (aangemaakt 1 sec na login)
+
+### BlendMode
+- `SetBlendMode("ADD")` = zwarte pixels transparant, goed voor logo's op donkere BG
+- Nadeel: maakt gehele murloc semi-transparant als afbeelding donkere tinten heeft
+- Fix: override via DT_Theme.lua callback met `SetBlendMode("BLEND")`
+
+### Plugin refactoring patroon
+- Tegel UI → eigen lua met publieke builder functie
+- Core roept builder aan: `if DT_BuildXYZ then DT_BuildXYZ(container, W, Y) end`
+- Data blijft in events.lua (public API)
+- Frame wordt hergebruikt via `parentScroll._xyzFrame`
