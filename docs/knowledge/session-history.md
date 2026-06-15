@@ -125,3 +125,37 @@ Oplossing: workflows handmatig aanmaken via GitHub UI.
 ---
 
 *Beheerd door data-grinder + wow-brain-manager*
+
+## Sessie 2026-06-15 — Theme Engine 2.0 + DT_Abundance refactor
+
+### Uitgevoerd
+- WowTracker v3.5.5 opgeleverd
+- DT_Theme.lua v2.0 → v1.2.0: 11 themes totaal
+  - Nieuw: Titan Bronze, Void Reborn, Emerald Elven
+  - B/X/Murloc icon callbacks (DT_RegistryOpenBtn, DelveTrackerFrame.close, DT_MurlocBtn)
+  - BlendMode ADD → BLEND fix
+- 45 TGA icons gesneden van ChatGPT sheet (1467×1072px, zwarte achtergrond)
+  - Correcte crop: x=440-619, 647-816, 848-1023, 1048-1217, 1248-1415
+  - v3.5.5 naamgeving: icon_{slot}_{themekey}.tga in Media/Icons/20px/
+- WowTracker.lua: knoppen 22px → 32px, Cleanup DB knop admin panel
+- DT_Abundance.lua aangemaakt — Abundance tegel uit DT_QuickSet gesplitst
+  - Publieke API: DT_BuildAbundanceFrame(), DT_RefreshAbundanceFrame()
+  - Data via DT_GetAbundanceData() uit DT_events.lua
+- DT_MinimapIcon.lua: nieuw bestand, LibDBIcon integratie
+- WowTracker.xml: DT_Abundance + MinimapIcon in load order
+- /wt-cleanup command: verwijdert dubbele roster entries
+
+### Kritieke lessen
+- Icon sheet MOET zwarte achtergrond hebben voor correcte crop detectie
+- v3.5.5 draait DelveTrackerDB, repo had WowTrackerDB (v4.0.3) — baseline = v3.5.5
+- SetBlendMode("ADD") op MBtn.tex maakt murloc transparant → fix via DT_Theme.lua callback
+- DT_RegistryOpenBtn is globaal → bereikbaar vanuit DT_Theme.lua zonder plugin aan te raken
+- Abundance tegel dependency map:
+  - UI: DT_QuickSet → DT_BuildAbundanceFrame() in DT_Abundance.lua
+  - Data: DT_events.lua → DT_GetAbundanceData() public API
+  - Strings: WowTracker.lua i18n (QS_AB_*, QS_LOADING, QS_REMAINING)
+
+### GitHub status
+- WowTracker: ✓ gepushed (commit 4880c2e)
+- README: ✓ bijgewerkt v3.5.5
+- CHANGELOG: ✓ v3.5.5 entry toegevoegd
