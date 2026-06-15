@@ -165,3 +165,32 @@ local cm = C_ClassColor.GetClassColor("WARLOCK")  -- uppercase classToken
 -- cm.r, cm.g, cm.b (0-1 range)
 -- cm:GetHexColor() → "rrggbb" string
 ```
+
+
+## DT_Abundance Plugin (v3.5.5+)
+
+**Bestand:** `Plugins/Abundance/DT_Abundance.lua`
+
+**Doel:** Abundance tegel voor Bounty tab, Nemesis subtab
+
+**Publieke API:**
+```lua
+DT_BuildAbundanceFrame(parentScroll, scrollWidth, yOffset)
+-- Bouwt/hergebruikt het frame in een gegeven scroll container
+-- Geeft het frame terug
+
+DT_RefreshAbundanceFrame(abf)
+-- Vult het frame met actuele data van DT_GetAbundanceData()
+```
+
+**Dependencies:**
+- `DT_GetAbundanceData()` → DT_events.lua (data engine)
+- `DT_FormatAbundanceTime()` → DT_events.lua
+- Called by: `DT_QuickSet.lua` via `DT_BuildAbundanceFrame(scN, SCROLL_W, AB_Y)`
+
+**Load order:** Na DT_QuickSet in WowTracker.xml
+
+**Frame structuur:**
+- stripe (groen) + checkbox indicator + title + timer (rechts) + info + info2
+- SetSize(scrollWidth, 68)
+- C_Timer.NewTicker(60, ...) voor live refresh
