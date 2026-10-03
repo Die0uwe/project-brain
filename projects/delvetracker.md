@@ -34,6 +34,6 @@ Zie docs/knowledge/addon-architecture.md: `DelveTracker.toc`, `DelveTracker.lua`
 - Beheer-skills (volgens skill-register): wow-addon-architect, wow-db-migrator, wow-dt-integrator, wow-poi-builder/-auditor, wow-prey-research, wow-i18n-specialist.
 
 ## Openstaande punten
-- Besluit nodig: DelveTracker-repo archiveren of een README toevoegen die naar WowTracker verwijst.
+- Besluit Ouwe (2026-10-03): de DelveTracker-repo blijft ongewijzigd (niet archiveren, geen README).
 - Releasestatus en plugin-lijst van v3.5.5 op CurseForge verifiëren.
 - Satellietrepo's zijn nu bekend: WowTracker, WowTracker-i18n, WowTracker-Themes (zie [wowtracker](wowtracker.md)).

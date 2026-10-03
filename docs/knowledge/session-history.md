@@ -171,7 +171,8 @@ Oplossing: workflows handmatig aanmaken via GitHub UI.
 ### Bevindingen
 - WowTracker (v3.5.5) is de actuele addon-repo; DelveTracker staat op 3.3.1-beta-hotfix en heeft geen README.
 - `scriptspace-releases`: de updater leest de GitHub Releases, niet de bestanden op main. Laatste release is V0.22.0, de CMS is 0.24.2: een nieuwe ondertekende release is nog te bouwen (lokaal, `tools/release.py`). De 0.13.0-bestanden in de hoofdmap zijn oud en ongebruikt.
-- Slayer-Suite: plugin-header en CHANGELOG zeggen 25.12.30, het laatste commitbericht noemt 26.1.0.
+- Slayer-Suite: plugin-header en CHANGELOG zeiden 25.12.30, het laatste commit 26.1.0. Rechtgezet naar 26.1.0 (commit a4b3df3). De eerste commit bevat nog hardgecodeerde Blizzard-credentials in de git-geschiedenis van de publieke repo: client secret roteren.
+- Besluiten van Ouwe: DelveTracker-repo blijft ongewijzigd; SCANNER blijft staan ("wordt vervolgd").
 - `SCANNER` bevat alleen een LICENSE; `ai-emoji-generator`, `zeki` (fork) en `BoreD` zijn van 2023 en niet bekeken.
 - famfinder mist `google-services.json`: Firebase- en Gemini-functies werken pas na toevoegen.
 

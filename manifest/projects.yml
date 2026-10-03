@@ -90,7 +90,7 @@ projects:
     status: "actief-volgens-brain"
     stack: "PHP 8.x, WordPress, Blizzard EU API"
     description: "WordPress-plugin voor slayeralliance.com (armory, roster, recruitment, Discord)."
-    version: "25.12.30 (plugin-header; laatste commit noemt 26.1.0)"
+    version: "26.1.0 (Sprint 1 security hardening, 2026-06-04)"
     depends_on: []
     deploys_to: ["slayeralliance-com"]
     documents: []

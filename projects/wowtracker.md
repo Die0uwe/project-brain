@@ -24,4 +24,4 @@ Geen buildstap; `deploy.sh` in de repo. Push via wow-git-manager, in-game tests 
 
 ## Openstaande punten
 - Geen wijzigingen sinds juni 2026; releasestatus op CurseForge niet gecontroleerd.
-- Doel van `SCANNER` vaststellen of de repo opruimen.
+- `SCANNER`: blijft staan, "wordt vervolgd" (besluit Ouwe 2026-10-03); doel nog niet vastgelegd.
