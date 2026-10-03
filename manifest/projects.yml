@@ -1,0 +1,212 @@
+# Manifest van alle projecten in het DieOuwe ecosysteem.
+# Formaat: strikte YAML-subset (lijst van mappings, scalars, inline lijsten),
+# zodat tools/build_index.py zonder externe bibliotheken kan inlezen.
+# Regel: geen geheimen; wat niet geverifieerd is staat als "onbekend". Zie docs/RAG-ARCHITECTURE.md.
+projects:
+  - id: "project-brain"
+    type: "repo"
+    name: "project-brain"
+    url: "https://github.com/Die0uwe/project-brain"
+    status: "actief"
+    stack: "Markdown, HTML, Python (stdlib)"
+    description: "Centrale AI-kennisbank en RAG-bron voor het hele ecosysteem."
+    version: "onbekend"
+    depends_on: []
+    deploys_to: ["extern:github-pages"]
+    documents: ["scriptspace-cms", "blueprint-cms", "slayer-suite", "delvetracker", "cursebot", "dieouwe-ai", "dieouwe-skills"]
+    docs: ["projects/project-brain.md", "CONTEXT.md", "docs/RAG-ARCHITECTURE.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "wow-brain-manager"
+    verified: "ja"
+
+  - id: "scriptspace-cms"
+    type: "repo"
+    name: "ScriptSpace CMS"
+    url: "https://github.com/Die0uwe/scriptspace-cms"
+    status: "in-ontwikkeling"
+    stack: "PHP 8.x, MySQL, JS (Ace)"
+    description: "Accounts, AI-playground, sandboxes, admin en updater achter scriptspace.nl (privé repo)."
+    version: "0.23.0"
+    depends_on: ["dieouwe-ai"]
+    deploys_to: ["scriptspace-nl"]
+    documents: []
+    docs: ["projects/scriptspace-cms.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "onbekend"
+    verified: "ja"
+
+  - id: "scriptspace-nl"
+    type: "site"
+    name: "scriptspace.nl"
+    url: "https://scriptspace.nl"
+    status: "live-versie-onbekend"
+    stack: "PHP, MySQL, STRATO shared"
+    description: "Persoonlijke website van Ouwe, live uitrol van ScriptSpace CMS."
+    version: "onbekend"
+    depends_on: ["scriptspace-cms"]
+    deploys_to: []
+    documents: []
+    docs: ["projects/scriptspace-nl.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "onbekend"
+    verified: "deels"
+
+  - id: "blueprint-cms"
+    type: "repo"
+    name: "Blueprint CMS"
+    url: "https://github.com/Die0uwe/Blueprint-CMS"
+    status: "actief"
+    stack: "PHP 8.3+, MariaDB, Twig"
+    description: "Modulair community-CMS voor gaming en gilden met 11 modules."
+    version: "1.28.0"
+    depends_on: []
+    deploys_to: []
+    documents: []
+    docs: ["projects/blueprint-cms.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "onbekend"
+    verified: "ja"
+
+  - id: "blueprint-cms-ai-studio"
+    type: "tool"
+    name: "Blueprint CMS module ai-studio"
+    url: "onbekend"
+    status: "onbekend"
+    stack: "PHP (verwacht, niet geverifieerd)"
+    description: "Genoemde nieuwe module in branch feature/ai-studio; branch en PR niet gevonden."
+    version: "onbekend"
+    depends_on: ["blueprint-cms"]
+    deploys_to: []
+    documents: []
+    docs: ["projects/blueprint-cms-ai-studio.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "onbekend"
+    verified: "nee"
+
+  - id: "slayer-suite"
+    type: "repo"
+    name: "Slayer Alliance Master Suite"
+    url: "onbekend"
+    status: "actief-volgens-brain"
+    stack: "PHP 8.x, WordPress, Blizzard EU API"
+    description: "WordPress-plugin voor slayeralliance.com (armory, roster, recruitment, Discord)."
+    version: "onbekend"
+    depends_on: []
+    deploys_to: ["slayeralliance-com"]
+    documents: []
+    docs: ["projects/slayer-suite.md", "docs/tokens-and-keys/blizzard-oauth.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "wp-sa-suite"
+    verified: "deels"
+
+  - id: "slayeralliance-com"
+    type: "site"
+    name: "slayeralliance.com"
+    url: "https://slayeralliance.com"
+    status: "onbekend"
+    stack: "WordPress"
+    description: "Website van de Slayer Alliance community."
+    version: "onbekend"
+    depends_on: ["slayer-suite"]
+    deploys_to: []
+    documents: []
+    docs: ["projects/slayeralliance-com.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "wp-sa-suite"
+    verified: "deels"
+
+  - id: "dieouwe-nl"
+    type: "site"
+    name: "dieouwe.nl"
+    url: "https://www.dieouwe.nl"
+    status: "onbekend"
+    stack: "onbekend"
+    description: "Persoonlijke site van Ouwe; verder niets geverifieerd."
+    version: "onbekend"
+    depends_on: []
+    deploys_to: []
+    documents: []
+    docs: ["projects/dieouwe-nl.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "onbekend"
+    verified: "nee"
+
+  - id: "delvetracker"
+    type: "addon"
+    name: "DelveTracker Suite (WowTracker)"
+    url: "https://github.com/Die0uwe/DelveTracker"
+    status: "actief-volgens-brain"
+    stack: "Lua, WoW Retail 12.0.5 Midnight"
+    description: "Core-addon met DT_-plugins: kompas-HUD, cloth/warband, lockouts, currencies."
+    version: "3.5.5 (laatst gedocumenteerd, juni 2026)"
+    depends_on: []
+    deploys_to: ["extern:curseforge"]
+    documents: []
+    docs: ["projects/delvetracker.md", "docs/knowledge/addon-architecture.md", "docs/knowledge/known-bugs.md", "docs/api/deprecated-calls.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "wow-addon-architect"
+    verified: "deels"
+
+  - id: "cursebot"
+    type: "tool"
+    name: "CurseBot (Slayer Alliance Edition)"
+    url: "https://github.com/Die0uwe/cursebot"
+    status: "actief-volgens-brain"
+    stack: "Python 3.11+, discord.py, CustomTkinter"
+    description: "Discord-bot en desktoptool voor CurseForge-addonbeheer."
+    version: "2.2.0 (laatst gedocumenteerd, juni 2026)"
+    depends_on: []
+    deploys_to: []
+    documents: []
+    docs: ["projects/cursebot.md", "docs/tokens-and-keys/curseforge-api-key.md", "docs/tokens-and-keys/discord-bot-token.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "discord-bot-architect"
+    verified: "deels"
+
+  - id: "famfinder"
+    type: "repo"
+    name: "famfinder"
+    url: "https://github.com/Die0uwe/famfinder"
+    status: "onbekend"
+    stack: "Android (onbekend)"
+    description: "Android-app van Ouwe; inhoud niet geverifieerd."
+    version: "onbekend"
+    depends_on: []
+    deploys_to: []
+    documents: []
+    docs: ["projects/famfinder.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "onbekend"
+    verified: "nee"
+
+  - id: "dieouwe-ai"
+    type: "ai"
+    name: "DIEOUWE AI (eigen model)"
+    url: "onbekend"
+    status: "actief"
+    stack: "Open WebUI, Ollama, Docker, Cloudflare Tunnel"
+    description: "Eigen lokaal model, gekoppeld aan ScriptSpace en mogelijk Blueprint CMS."
+    version: "onbekend"
+    depends_on: []
+    deploys_to: []
+    documents: []
+    docs: ["projects/dieouwe-ai.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "onbekend"
+    verified: "deels"
+
+  - id: "dieouwe-skills"
+    type: "ai"
+    name: "DieOuwe skill-ecosysteem"
+    url: "onbekend"
+    status: "actief-volgens-brain"
+    stack: "Claude skills"
+    description: "Orkestrator en 30+ skills voor techniek, design, kennisbank en platform."
+    version: "onbekend"
+    depends_on: []
+    deploys_to: []
+    documents: ["project-brain"]
+    docs: ["projects/dieouwe-skills.md", "docs/skills/skill-register.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "wow-bigboss-orchestrator"
+    verified: "deels"
