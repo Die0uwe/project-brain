@@ -16,8 +16,8 @@ PHP-platform achter scriptspace.nl: accounts met rollen (RBAC), een AI-playgroun
 - AI-aanbieders: DeepSeek, Gemini en een eigen model ("DIEOUWE AI") via Open WebUI/Ollama of elke OpenAI-compatibele server.
 
 ## Versie en status
-- Versie 0.24.2 (bestand `VERSION`, CHANGELOG-entry van 2026-10-03). Status: in ontwikkeling, draait op scriptspace.nl.
-- Sinds 0.23.0 (zelfde dag): 0.24.0 afbeeldingen plakken met Ctrl+V en galerij plus versie-badge, 0.24.1 de startpagina als eerste scherm en een knop Afbeeldingen, 0.24.2 de knop Download project (hele project als ZIP).
+- Versie 0.25.0 (bestand `VERSION`, CHANGELOG-entry van 2026-10-03). Status: in ontwikkeling, draait op scriptspace.nl.
+- Sinds 0.23.0 (zelfde dag): 0.24.0 afbeeldingen plakken met Ctrl+V en galerij plus versie-badge, 0.24.1 de startpagina als eerste scherm en een knop Afbeeldingen, 0.25.0 de knop Download project (hele project als ZIP). 0.25.0: `ai_builtin => false` zet DeepSeek en Gemini uit, alleen het eigen model.
 - Laatste gepubliceerde release in `scriptspace-releases`: V0.22.0, zie [scriptspace-releases](scriptspace-releases.md); 0.23.0 en 0.24.x zijn nog niet uitgebracht.
 - Repository is **privé** (GitHub); deze kaart bevat daarom alleen functionele feiten, geen config.
 

@@ -165,7 +165,7 @@ Oplossing: workflows handmatig aanmaken via GitHub UI.
 ### Uitgevoerd
 - famfinder (SpotFam): `assembleDebug` faalde in CI omdat de debug-keystore in `.gitignore` stond. Opgelost met de standaard debug-keystore van de Android Gradle Plugin; release-signing alleen als het secret `STORE_PASSWORD` bestaat. Gemerged naar main (commit beb7209), CI levert artifact `SpotFam-Debug-APK` (ca. 28 MB).
 - PanicRoom CMS gestart (multi-agent): architectuur (GitHub, Vercel Hobby, Supabase Free), Windows-scanner v0.1.0 en v0.2.0 (prestaties, schijven, updates), JSON-schema 1.1, dashboard, 13 tests. Gemerged via PR #1; test op een echte pc staat nog open.
-- ScriptSpace CMS: 0.23.0 naar 0.24.2 (afbeeldingen plakken en galerij, startpagina als eerste scherm, knop Download project). Blueprint CMS: module ai-studio via PR #1 gemerged.
+- ScriptSpace CMS: 0.23.0 naar 0.25.0 (afbeeldingen plakken en galerij, startpagina als eerste scherm, knop Download project, 0.25.0 schakelaar ai_builtin om DeepSeek en Gemini uit te zetten). Blueprint CMS: module ai-studio via PR #1 gemerged.
 - Alle 16 repo's van Die0uwe nagelopen; project-brain, manifest en projectkaarten bijgewerkt.
 
 ### Bevindingen

@@ -26,7 +26,7 @@ projects:
     status: "in-ontwikkeling"
     stack: "PHP 8.x, MySQL, JS (Ace)"
     description: "Accounts, AI-playground, sandboxes, admin en updater achter scriptspace.nl (privé repo)."
-    version: "0.24.2"
+    version: "0.25.0"
     depends_on: ["dieouwe-ai"]
     deploys_to: ["scriptspace-nl", "scriptspace-releases"]
     documents: []
@@ -234,7 +234,7 @@ projects:
     status: "actief"
     stack: "zip + ondertekend manifest (Ed25519)"
     description: "Publiek releasekanaal voor de updater van ScriptSpace CMS."
-    version: "0.22.0 (laatste GitHub Release; CMS zelf is 0.24.2)"
+    version: "0.22.0 (laatste GitHub Release; CMS zelf is 0.25.0)"
     depends_on: ["scriptspace-cms"]
     deploys_to: []
     documents: []
