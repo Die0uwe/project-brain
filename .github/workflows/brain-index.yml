@@ -1,0 +1,32 @@
+name: Brain index
+
+# Valideert dat de AI-index bouwt, geen geheimen bevat en actueel is.
+# Commit NOOIT zelf naar main: de index wordt lokaal gebouwd en meegecommit in de PR.
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Tests voor de indexbouwer
+        run: python3 tools/test_build_index.py
+
+      - name: Valideren (verplichte velden, dode links, geheimen)
+        run: python3 tools/build_index.py --validate
+
+      - name: Controleren dat index/ actueel is
+        run: python3 tools/build_index.py --check
