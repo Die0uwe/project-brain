@@ -14,7 +14,7 @@ WoW-addonsuite voor Retail 12.0.5 Midnight (build 12.0.5.67314, `## Interface: 1
 - Themes via `DT_Theme.lua` (11 themes sinds 2026-06-15).
 
 ## Versie en status
-- Laatst gedocumenteerd: WowTracker v3.5.5 (sessie 2026-06-15, zie docs/knowledge/session-history.md). Actuele versie in de repo: onbekend/te verifiëren (repo niet toegankelijk in deze sessie).
+- De repo `Die0uwe/DelveTracker` (laatste push 2026-06-02) staat op **3.3.1-beta-hotfix** (CHANGELOG-kop) en heeft geen README. De actuele versie **v3.5.5** (sessie 2026-06-15) staat in de repo `Die0uwe/WowTracker`, zie [wowtracker](wowtracker.md) en docs/knowledge/session-history.md.
 - Plugins volgens de brain (stand juni 2026): DT_PreyTracker (kompas-HUD, in ontwikkeling), DT_ClothCounter, DT_WarbankBuddy, AdvancedAutoReply, DT_CustomAFK.
 
 ## Structuur
@@ -34,5 +34,6 @@ Zie docs/knowledge/addon-architecture.md: `DelveTracker.toc`, `DelveTracker.lua`
 - Beheer-skills (volgens skill-register): wow-addon-architect, wow-db-migrator, wow-dt-integrator, wow-poi-builder/-auditor, wow-prey-research, wow-i18n-specialist.
 
 ## Openstaande punten
-- Actuele versie, releasestatus en plugin-lijst in de repo verifiëren.
-- Eventuele losse addon-repos (naast DelveTracker) zijn niet bekend: `gh repo list` is in deze sessie geblokkeerd.
+- Besluit nodig: DelveTracker-repo archiveren of een README toevoegen die naar WowTracker verwijst.
+- Releasestatus en plugin-lijst van v3.5.5 op CurseForge verifiëren.
+- Satellietrepo's zijn nu bekend: WowTracker, WowTracker-i18n, WowTracker-Themes (zie [wowtracker](wowtracker.md)).

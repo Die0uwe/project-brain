@@ -17,9 +17,14 @@ uit debugging sessies en design beslissingen staan hier centraal.
 
 | Project | Tech | Status |
 |---|---|---|
-| **DelveTracker Suite** | Lua / WoW Retail 12.0.5 Midnight | Actief |
+| **WowTracker** (+ i18n, Themes; v3.5.5) | Lua / WoW Retail 12.0.5 Midnight | Actief |
+| **DelveTracker** (oudere repo) | Lua / WoW Retail 12.0.5 Midnight | Verouderd |
 | **CurseBot** | Python 3.11+ / Discord | Actief |
 | **Slayer Alliance Plugin** | PHP / WordPress | Actief |
+| **ScriptSpace CMS** | PHP 8.x / MySQL | In ontwikkeling |
+| **Blueprint CMS** | PHP 8.3 / MariaDB | Actief |
+| **PanicRoom CMS** | Python / PowerShell / HTML | In ontwikkeling |
+| **famfinder (SpotFam)** | Android / Kotlin | In ontwikkeling |
 
 Alle projecten (ook sites, CMS'en en AI's) staan in het [manifest](manifest/projects.yml).
 

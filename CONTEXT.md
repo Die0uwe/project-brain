@@ -1,5 +1,5 @@
 # DieOuwe Ecosysteem — Project Brain CONTEXT
-> **AI-sessie instructies** · Altijd als eerste lezen · Laatste update: 2026-06-14
+> **AI-sessie instructies** · Altijd als eerste lezen · Laatste update: 2026-10-03
 
 ---
 
@@ -14,9 +14,14 @@ Claude leest dit **vóór elke sessie** om context op te bouwen zonder herhaling
 
 | Project | Taal | Repo | Status |
 |---|---|---|---|
-| DelveTracker Suite | Lua (WoW Retail 12.0.5) | `Die0uwe/DelveTracker` | Actief |
+| WowTracker (actuele addon, v3.5.5) | Lua (WoW Retail 12.0.5) | `Die0uwe/WowTracker` (+ `-i18n`, `-Themes`) | Actief |
+| DelveTracker (oudere addon-repo, 3.3.1-beta) | Lua (WoW Retail 12.0.5) | `Die0uwe/DelveTracker` | Verouderd, besluit open |
 | CurseBot | Python 3.11+ | `Die0uwe/cursebot` | Actief |
-| Slayer Alliance Plugin | PHP (WordPress) | `slayeralliance.com` (wp) | Actief |
+| Slayer Alliance Plugin | PHP (WordPress) | `Die0uwe/Slayer-Suite` | Actief |
+| ScriptSpace CMS (0.24.2) | PHP 8.x, MySQL | `Die0uwe/scriptspace-cms` (privé) + `scriptspace-releases` | In ontwikkeling |
+| Blueprint CMS (1.28.0) | PHP 8.3, MariaDB | `Die0uwe/Blueprint-CMS` | Actief |
+| PanicRoom CMS (0.2.0) | Python, PowerShell, HTML | `Die0uwe/panicroom` (privé) | In ontwikkeling |
+| famfinder / SpotFam | Android (Kotlin, Compose) | `Die0uwe/famfinder` (privé) | In ontwikkeling |
 | Project Brain | Markdown (Docs) | `Die0uwe/project-brain` | Actief |
 
 ---

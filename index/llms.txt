@@ -19,11 +19,14 @@
 - [Slayer Alliance Master Suite](projects/slayer-suite.md) [repo, actief-volgens-brain]: WordPress-plugin voor slayeralliance.com (armory, roster, recruitment, Discord).
 - [slayeralliance.com](projects/slayeralliance-com.md) [site, onbekend]: Website van de Slayer Alliance community.
 - [dieouwe.nl](projects/dieouwe-nl.md) [site, onbekend]: Persoonlijke site van Ouwe; verder niets geverifieerd.
-- [DelveTracker Suite (WowTracker)](projects/delvetracker.md) [addon, actief-volgens-brain]: Core-addon met DT_-plugins: kompas-HUD, cloth/warband, lockouts, currencies.
+- [DelveTracker Suite (WowTracker)](projects/delvetracker.md) [addon, actief-volgens-brain]: Oudere addon-repo met DT_-plugins (kompas-HUD, cloth/warband, lockouts, currencies); de actuele v3.5.5 staat in de repo WowTracker.
 - [CurseBot (Slayer Alliance Edition)](projects/cursebot.md) [tool, actief-volgens-brain]: Discord-bot en desktoptool voor CurseForge-addonbeheer.
-- [famfinder](projects/famfinder.md) [repo, onbekend]: Android-app van Ouwe; inhoud niet geverifieerd.
+- [famfinder](projects/famfinder.md) [repo, in-ontwikkeling]: Android-app SpotFam: locatie delen met familie en vrienden, veilige zones, chat, SOS en ouderlijk toezicht (privé repo).
 - [DIEOUWE AI (eigen model)](projects/dieouwe-ai.md) [ai, actief]: Eigen lokaal model, gekoppeld aan ScriptSpace en mogelijk Blueprint CMS.
 - [DieOuwe skill-ecosysteem](projects/dieouwe-skills.md) [ai, actief-volgens-brain]: Orkestrator en 30+ skills voor techniek, design, kennisbank en platform.
+- [PanicRoom CMS](projects/panicroom.md) [repo, in-ontwikkeling]: Windows-hardwarescan (JSON) met dashboard voor overzicht, prestaties en updateadvies; geen automatische installaties (privé repo).
+- [scriptspace-releases](projects/scriptspace-releases.md) [repo, actief]: Publiek releasekanaal voor de updater van ScriptSpace CMS.
+- [WowTracker (Slayer Alliance Edition)](projects/wowtracker.md) [addon, actief-volgens-brain]: Actuele multi-plugin warband-tracker met 11 thema's en 5 talen; opvolger van de DelveTracker-repo.
 
 ## Kennis
 - [docs/knowledge/](docs/knowledge/): WoW-IDs, bugs, kompaswiskunde, sessie-lessen
@@ -31,4 +34,4 @@
 - [docs/tokens-and-keys/](docs/tokens-and-keys/): HOE je tokens aanmaakt, nooit waarden
 - [docs/skills/skill-register.md](docs/skills/skill-register.md): wie beheert wat
 
-Totaal: 13 projecten, 229 chunks.
+Totaal: 16 projecten, 253 chunks.

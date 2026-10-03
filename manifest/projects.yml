@@ -13,7 +13,7 @@ projects:
     version: "onbekend"
     depends_on: []
     deploys_to: ["extern:github-pages"]
-    documents: ["scriptspace-cms", "blueprint-cms", "slayer-suite", "delvetracker", "cursebot", "dieouwe-ai", "dieouwe-skills"]
+    documents: ["scriptspace-cms", "scriptspace-releases", "blueprint-cms", "slayer-suite", "delvetracker", "wowtracker", "cursebot", "panicroom", "famfinder", "dieouwe-ai", "dieouwe-skills"]
     docs: ["projects/project-brain.md", "CONTEXT.md", "docs/RAG-ARCHITECTURE.md"]
     last_checked: "2026-10-03"
     owner_skill: "wow-brain-manager"
@@ -26,9 +26,9 @@ projects:
     status: "in-ontwikkeling"
     stack: "PHP 8.x, MySQL, JS (Ace)"
     description: "Accounts, AI-playground, sandboxes, admin en updater achter scriptspace.nl (privé repo)."
-    version: "0.23.0"
+    version: "0.24.2"
     depends_on: ["dieouwe-ai"]
-    deploys_to: ["scriptspace-nl"]
+    deploys_to: ["scriptspace-nl", "scriptspace-releases"]
     documents: []
     docs: ["projects/scriptspace-cms.md"]
     last_checked: "2026-10-03"
@@ -86,11 +86,11 @@ projects:
   - id: "slayer-suite"
     type: "repo"
     name: "Slayer Alliance Master Suite"
-    url: "onbekend"
+    url: "https://github.com/Die0uwe/Slayer-Suite"
     status: "actief-volgens-brain"
     stack: "PHP 8.x, WordPress, Blizzard EU API"
     description: "WordPress-plugin voor slayeralliance.com (armory, roster, recruitment, Discord)."
-    version: "onbekend"
+    version: "25.12.30 (plugin-header; laatste commit noemt 26.1.0)"
     depends_on: []
     deploys_to: ["slayeralliance-com"]
     documents: []
@@ -137,8 +137,8 @@ projects:
     url: "https://github.com/Die0uwe/DelveTracker"
     status: "actief-volgens-brain"
     stack: "Lua, WoW Retail 12.0.5 Midnight"
-    description: "Core-addon met DT_-plugins: kompas-HUD, cloth/warband, lockouts, currencies."
-    version: "3.5.5 (laatst gedocumenteerd, juni 2026)"
+    description: "Oudere addon-repo met DT_-plugins (kompas-HUD, cloth/warband, lockouts, currencies); de actuele v3.5.5 staat in de repo WowTracker."
+    version: "3.3.1-beta-hotfix (CHANGELOG van deze repo, laatste push 2026-06-02)"
     depends_on: []
     deploys_to: ["extern:curseforge"]
     documents: []
@@ -167,17 +167,17 @@ projects:
     type: "repo"
     name: "famfinder"
     url: "https://github.com/Die0uwe/famfinder"
-    status: "onbekend"
-    stack: "Android (onbekend)"
-    description: "Android-app van Ouwe; inhoud niet geverifieerd."
-    version: "onbekend"
+    status: "in-ontwikkeling"
+    stack: "Kotlin, Jetpack Compose, Room, Firebase (Gemini), Gradle, GitHub Actions"
+    description: "Android-app SpotFam: locatie delen met familie en vrienden, veilige zones, chat, SOS en ouderlijk toezicht (privé repo)."
+    version: "1.0 (versionCode 1, nog geen release)"
     depends_on: []
-    deploys_to: []
+    deploys_to: ["extern:github-actions-artifact"]
     documents: []
     docs: ["projects/famfinder.md"]
     last_checked: "2026-10-03"
     owner_skill: "onbekend"
-    verified: "nee"
+    verified: "ja"
 
   - id: "dieouwe-ai"
     type: "ai"
@@ -210,3 +210,51 @@ projects:
     last_checked: "2026-10-03"
     owner_skill: "wow-bigboss-orchestrator"
     verified: "deels"
+
+  - id: "panicroom"
+    type: "repo"
+    name: "PanicRoom CMS"
+    url: "https://github.com/Die0uwe/panicroom"
+    status: "in-ontwikkeling"
+    stack: "Python 3.9+ (stdlib), PowerShell, statische HTML/Tailwind; gepland Vercel en Supabase"
+    description: "Windows-hardwarescan (JSON) met dashboard voor overzicht, prestaties en updateadvies; geen automatische installaties (privé repo)."
+    version: "0.2.0 (nog niet getagd, test op echte pc volgt)"
+    depends_on: []
+    deploys_to: []
+    documents: []
+    docs: ["projects/panicroom.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "wow-bigboss-orchestrator"
+    verified: "ja"
+
+  - id: "scriptspace-releases"
+    type: "repo"
+    name: "scriptspace-releases"
+    url: "https://github.com/Die0uwe/scriptspace-releases"
+    status: "actief"
+    stack: "zip + ondertekend manifest (Ed25519)"
+    description: "Publiek releasekanaal voor de updater van ScriptSpace CMS."
+    version: "0.22.0 (laatste GitHub Release; CMS zelf is 0.24.2)"
+    depends_on: ["scriptspace-cms"]
+    deploys_to: []
+    documents: []
+    docs: ["projects/scriptspace-releases.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "onbekend"
+    verified: "ja"
+
+  - id: "wowtracker"
+    type: "addon"
+    name: "WowTracker (Slayer Alliance Edition)"
+    url: "https://github.com/Die0uwe/WowTracker"
+    status: "actief-volgens-brain"
+    stack: "Lua, WoW Retail 12.0.5 Midnight; satellietrepo's WowTracker-i18n en WowTracker-Themes"
+    description: "Actuele multi-plugin warband-tracker met 11 thema's en 5 talen; opvolger van de DelveTracker-repo."
+    version: "3.5.5 (2026-06-15)"
+    depends_on: []
+    deploys_to: ["extern:curseforge"]
+    documents: []
+    docs: ["projects/wowtracker.md", "docs/knowledge/session-history.md"]
+    last_checked: "2026-10-03"
+    owner_skill: "wow-addon-architect"
+    verified: "ja"
