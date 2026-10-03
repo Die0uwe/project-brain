@@ -6,12 +6,22 @@ bijgewerkt: 2026-10-03
 # Blueprint CMS module ai-studio
 
 ## Status
-**Onbekend/te verifiëren.** Opdracht noemt een nieuwe module `ai-studio` in PR/branch `feature/ai-studio`. In deze sessie is die branch op GitHub niet gevonden (404) en de PR-lijst van Die0uwe/Blueprint-CMS is leeg. Er is dus niets over de inhoud te zeggen zonder te verzinnen.
+In review: PR https://github.com/Die0uwe/Blueprint-CMS/pull/1 (branch `feature/ai-studio`), nog niet gemerged.
 
-## Wat wel vaststaat
-- Een module in Blueprint CMS is een map `modules/<slug>/` met `module.json` en `src/` (namespace `CommunityFusion\Modules\...`), zie [blueprint-cms](blueprint-cms.md).
-- De bestaande AI-module is `ollama` (versie 1.0.0).
+## Doel
+Webomgeving in het Blueprint-admin: links chat met AI-providers op basis van eigen API-keys, rechts een eigen code-editor (HTML/PHP/Twig/JS/CSS). De AI leest de editorinhoud mee en doet een wijzigingsvoorstel als diff; pas na expliciet "Toepassen" verandert de editor.
+
+## Inhoud (volgens de PR)
+- Providers: OpenAI, Anthropic, Google, DeepSeek, Mistral, Ollama (hergebruikt de instellingen van de bestaande `ollama`-module).
+- Nieuw `Core\Security\ContentSanitizer` (DOMDocument + whitelist), CLI `ai-studio:migrate`, idempotente migratie, `phpstan.neon`, testsuite `AiStudio`.
+- Keys versleuteld (AES-256-GCM) in cf_settings onder `aistudio.provider.{slug}.api_key`; nooit naar de frontend, logs of audit.
+- Elke POST-route: CSRF + PermissionMiddleware + RateLimitMiddleware. Permissie `aistudio.use` staat standaard alleen op rol admin.
+- Documentatie: `docs/security-notes.md` in de Blueprint-repo.
+
+## Afwijkingen van de opdracht (bewust, veilig)
+- CSRF-token voor SSE zit in een header (fetch + stream), niet in de query: een token in de URL lekt via logs.
+- Eigen settings-opslag omdat `SettingsRepository` ontsleutelde geheimen een uur in `storage/cache` bewaart (bestaande zwakte in de core; aparte issue gewenst).
 
 ## Openstaande punten
-- Branch of PR-link ophalen en deze kaart vullen (doel, blocks, permissies, afhankelijkheid van `ollama`).
-- Mogelijk gaat de branch in een andere repo of lokale clone staan die deze sessie niet kon zien.
+- Niet getest met echte API-calls of in een echte browser.
+- Geen link in de admin-zijbalk; bereikbaar via `/admin/ai-studio`.

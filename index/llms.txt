@@ -15,7 +15,7 @@
 - [ScriptSpace CMS](projects/scriptspace-cms.md) [repo, in-ontwikkeling]: Accounts, AI-playground, sandboxes, admin en updater achter scriptspace.nl (privé repo).
 - [scriptspace.nl](projects/scriptspace-nl.md) [site, live-versie-onbekend]: Persoonlijke website van Ouwe, live uitrol van ScriptSpace CMS.
 - [Blueprint CMS](projects/blueprint-cms.md) [repo, actief]: Modulair community-CMS voor gaming en gilden met 11 modules.
-- [Blueprint CMS module ai-studio](projects/blueprint-cms-ai-studio.md) [tool, onbekend]: Genoemde nieuwe module in branch feature/ai-studio; branch en PR niet gevonden.
+- [Blueprint CMS module ai-studio](projects/blueprint-cms-ai-studio.md) [tool, in-review]: Module ai-studio: chat met AI-providers en eigen editor met diff-voorstel (PR #1, branch feature/ai-studio).
 - [Slayer Alliance Master Suite](projects/slayer-suite.md) [repo, actief-volgens-brain]: WordPress-plugin voor slayeralliance.com (armory, roster, recruitment, Discord).
 - [slayeralliance.com](projects/slayeralliance-com.md) [site, onbekend]: Website van de Slayer Alliance community.
 - [dieouwe.nl](projects/dieouwe-nl.md) [site, onbekend]: Persoonlijke site van Ouwe; verder niets geverifieerd.
@@ -31,4 +31,4 @@
 - [docs/tokens-and-keys/](docs/tokens-and-keys/): HOE je tokens aanmaakt, nooit waarden
 - [docs/skills/skill-register.md](docs/skills/skill-register.md): wie beheert wat
 
-Totaal: 13 projecten, 227 chunks.
+Totaal: 13 projecten, 229 chunks.

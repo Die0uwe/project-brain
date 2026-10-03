@@ -70,10 +70,10 @@ projects:
   - id: "blueprint-cms-ai-studio"
     type: "tool"
     name: "Blueprint CMS module ai-studio"
-    url: "onbekend"
-    status: "onbekend"
-    stack: "PHP (verwacht, niet geverifieerd)"
-    description: "Genoemde nieuwe module in branch feature/ai-studio; branch en PR niet gevonden."
+    url: "https://github.com/Die0uwe/Blueprint-CMS/pull/1"
+    status: "in-review"
+    stack: "PHP 8.3, vanilla JS"
+    description: "Module ai-studio: chat met AI-providers en eigen editor met diff-voorstel (PR #1, branch feature/ai-studio)."
     version: "onbekend"
     depends_on: ["blueprint-cms"]
     deploys_to: []
@@ -81,7 +81,7 @@ projects:
     docs: ["projects/blueprint-cms-ai-studio.md"]
     last_checked: "2026-10-03"
     owner_skill: "onbekend"
-    verified: "nee"
+    verified: "ja"
 
   - id: "slayer-suite"
     type: "repo"
