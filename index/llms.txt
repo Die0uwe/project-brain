@@ -1,0 +1,34 @@
+# DieOuwe project-brain
+
+> Centrale kennisbank van Ouwe (Die0uwe): repos, sites, WoW-addons (Retail 12.0.5 Midnight), tools en AI's.
+> Lees eerst manifest/projects.yml, dan projects/<id>.md, en pas daarna de bron-repo. Geen geheimen in deze repo.
+> Laatste manifestcontrole: 2026-10-03. Regels met 'onbekend' zijn niet geverifieerd.
+
+## Startpunten
+- [CONTEXT.md](CONTEXT.md): sessie-instructies en kritieke constanten
+- [manifest/projects.yml](manifest/projects.yml): alle projecten met relaties
+- [docs/RAG-ARCHITECTURE.md](docs/RAG-ARCHITECTURE.md): hoe je deze brain als RAG-bron gebruikt
+- [index/brain.jsonl](index/brain.jsonl): chunks voor embedding (een JSON-object per regel)
+
+## Projecten
+- [project-brain](projects/project-brain.md) [repo, actief]: Centrale AI-kennisbank en RAG-bron voor het hele ecosysteem.
+- [ScriptSpace CMS](projects/scriptspace-cms.md) [repo, in-ontwikkeling]: Accounts, AI-playground, sandboxes, admin en updater achter scriptspace.nl (privé repo).
+- [scriptspace.nl](projects/scriptspace-nl.md) [site, live-versie-onbekend]: Persoonlijke website van Ouwe, live uitrol van ScriptSpace CMS.
+- [Blueprint CMS](projects/blueprint-cms.md) [repo, actief]: Modulair community-CMS voor gaming en gilden met 11 modules.
+- [Blueprint CMS module ai-studio](projects/blueprint-cms-ai-studio.md) [tool, in-review]: Module ai-studio: chat met AI-providers en eigen editor met diff-voorstel (PR #1, branch feature/ai-studio).
+- [Slayer Alliance Master Suite](projects/slayer-suite.md) [repo, actief-volgens-brain]: WordPress-plugin voor slayeralliance.com (armory, roster, recruitment, Discord).
+- [slayeralliance.com](projects/slayeralliance-com.md) [site, onbekend]: Website van de Slayer Alliance community.
+- [dieouwe.nl](projects/dieouwe-nl.md) [site, onbekend]: Persoonlijke site van Ouwe; verder niets geverifieerd.
+- [DelveTracker Suite (WowTracker)](projects/delvetracker.md) [addon, actief-volgens-brain]: Core-addon met DT_-plugins: kompas-HUD, cloth/warband, lockouts, currencies.
+- [CurseBot (Slayer Alliance Edition)](projects/cursebot.md) [tool, actief-volgens-brain]: Discord-bot en desktoptool voor CurseForge-addonbeheer.
+- [famfinder](projects/famfinder.md) [repo, onbekend]: Android-app van Ouwe; inhoud niet geverifieerd.
+- [DIEOUWE AI (eigen model)](projects/dieouwe-ai.md) [ai, actief]: Eigen lokaal model, gekoppeld aan ScriptSpace en mogelijk Blueprint CMS.
+- [DieOuwe skill-ecosysteem](projects/dieouwe-skills.md) [ai, actief-volgens-brain]: Orkestrator en 30+ skills voor techniek, design, kennisbank en platform.
+
+## Kennis
+- [docs/knowledge/](docs/knowledge/): WoW-IDs, bugs, kompaswiskunde, sessie-lessen
+- [docs/api/](docs/api/): Blizzard-API, events, deprecated calls
+- [docs/tokens-and-keys/](docs/tokens-and-keys/): HOE je tokens aanmaakt, nooit waarden
+- [docs/skills/skill-register.md](docs/skills/skill-register.md): wie beheert wat
+
+Totaal: 13 projecten, 229 chunks.

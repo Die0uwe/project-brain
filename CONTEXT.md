@@ -40,6 +40,8 @@ Claude leest dit **vóór elke sessie** om context op te bouwen zonder herhaling
 | Discord bot token | `docs/tokens-and-keys/discord-bot-token.md` |
 | Blizzard OAuth | `docs/tokens-and-keys/blizzard-oauth.md` |
 | Skill register (wie doet wat) | `docs/skills/skill-register.md` |
+| Alle projecten, relaties, status | `manifest/projects.yml` + `projects/<id>.md` |
+| Hoe deze brain als RAG-bron werkt | `docs/RAG-ARCHITECTURE.md` (index: `index/llms.txt`) |
 
 ---
 

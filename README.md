@@ -21,6 +21,8 @@ uit debugging sessies en design beslissingen staan hier centraal.
 | **CurseBot** | Python 3.11+ / Discord | Actief |
 | **Slayer Alliance Plugin** | PHP / WordPress | Actief |
 
+Alle projecten (ook sites, CMS'en en AI's) staan in het [manifest](manifest/projects.yml).
+
 ---
 
 ## Snel Navigeren
@@ -30,6 +32,17 @@ uit debugging sessies en design beslissingen staan hier centraal.
 - **[docs/api/](docs/api/)** — Blizzard API calls, deprecated functies
 - **[docs/tokens-and-keys/](docs/tokens-and-keys/)** — HOE je tokens aanmaakt (NOOIT echte waarden)
 - **[docs/skills/](docs/skills/)** — Skill register, organisatiestructuur
+
+---
+
+## Project-brain als AI-kennisbank
+
+Naast de WoW-kennis is deze repo ook de centrale RAG-bron die alle repositories, websites, addons, tools en AI's met elkaar verbindt.
+
+- **[manifest/projects.yml](manifest/projects.yml)**: een entry per project met type, status, stack, versie, relaties en bronpaden
+- **[projects/](projects/)**: korte projectkaarten (doel, stack, build/test/deploy, openstaande punten); wat niet geverifieerd is staat als `onbekend`
+- **[docs/RAG-ARCHITECTURE.md](docs/RAG-ARCHITECTURE.md)**: chunking, indexformaat, hoe agents het gebruiken, update-flow en veiligheidsregels
+- **[index/](index/)**: gegenereerd met `python3 tools/build_index.py` (`brain.jsonl` voor embedding, `llms.txt` als kaart voor agents); tests: `python3 tools/test_build_index.py`
 
 ---
 
