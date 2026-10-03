@@ -35,9 +35,14 @@ Modulair PHP-community-CMS voor gaming, streamers en gilden (guild management, W
 - S12 (premium ecosysteem) bewust uitgesteld.
 - Het RBAC-model is de basis voor [scriptspace-cms](scriptspace-cms.md).
 
-## AI Studio (module / branch feature/ai-studio)
-- **Onbekend/te verifiëren.** In deze sessie bestaat op GitHub geen branch `feature/ai-studio` en geen pull request in Die0uwe/Blueprint-CMS (branches: `main`, `plan/editors-plugins`; PR-lijst leeg). In de code staat geen verwijzing naar ai-studio. Het bestaande AI-onderdeel is de Ollama-module (`modules/ollama`, blocks `ollama-chat` en `ollama-assistant`, permissies `ollama.use`/`ollama.admin`).
-- Zodra de branch/PR bestaat: kaart [blueprint-cms-ai-studio](blueprint-cms-ai-studio.md) aanvullen.
+## AI Studio (modules/ai-studio)
+- Gemerged via PR #1 (commit 1ffa64a, 2026-10-03): chat met zes providers naast een eigen editor met diff-voorstellen. Zie [blueprint-cms-ai-studio](blueprint-cms-ai-studio.md).
+
+## Wachtwoord vergeten en herstellen
+- Gemerged via PR #2 (2026-10-04, commits 3ade252 en 4ca844d). Routes `/wachtwoord-vergeten` en `/wachtwoord-herstellen/{token}`, tabel `cf_password_resets` (bestaande installaties: `php cli/console.php migrate`), `Core\Auth\PasswordResetService`, docs in `docs/password-reset.md`.
+- Token 256 bit, alleen de hash opgeslagen, 60 minuten, eenmalig; limieten 3 per account en 5 per IP per uur; na een reset worden oudere sessies ongeldig.
+- Meegenomen fix: `CsrfProtection::verify()` accepteerde een leeg token zonder sessietoken.
+- Bekend en niet aangepast: `Request::ip()` vertrouwt `X-Forwarded-For` blind; CI-stap PHPStan (440 fouten op heel `src`) faalt al op main.
 
 ## Openstaande punten
 - README noemt de clone-URL `Bluprint-CMS` en de CI-badge `bluprint-cms` (typefout; de repo heet Blueprint-CMS).
