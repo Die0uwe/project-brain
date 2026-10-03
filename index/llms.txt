@@ -34,4 +34,4 @@
 - [docs/tokens-and-keys/](docs/tokens-and-keys/): HOE je tokens aanmaakt, nooit waarden
 - [docs/skills/skill-register.md](docs/skills/skill-register.md): wie beheert wat
 
-Totaal: 16 projecten, 254 chunks.
+Totaal: 16 projecten, 255 chunks.

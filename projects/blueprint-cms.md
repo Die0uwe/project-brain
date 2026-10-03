@@ -42,7 +42,13 @@ Modulair PHP-community-CMS voor gaming, streamers en gilden (guild management, W
 - Gemerged via PR #2 (2026-10-04, commits 3ade252 en 4ca844d). Routes `/wachtwoord-vergeten` en `/wachtwoord-herstellen/{token}`, tabel `cf_password_resets` (bestaande installaties: `php cli/console.php migrate`), `Core\Auth\PasswordResetService`, docs in `docs/password-reset.md`.
 - Token 256 bit, alleen de hash opgeslagen, 60 minuten, eenmalig; limieten 3 per account en 5 per IP per uur; na een reset worden oudere sessies ongeldig.
 - Meegenomen fix: `CsrfProtection::verify()` accepteerde een leeg token zonder sessietoken.
-- Bekend en niet aangepast: `Request::ip()` vertrouwt `X-Forwarded-For` blind; CI-stap PHPStan (440 fouten op heel `src`) faalt al op main.
+- Bekend en niet aangepast: `Request::ip()` vertrouwt `X-Forwarded-For` blind; CI-stap PHPStan faalt al op main (441 fouten op heel `src`, na PR #3 nog 433).
+
+## Inloggen met GitHub, Google en Discord
+- Gemerged via PR #3 (2026-10-04, commit 10054bc). De knoppen stonden er al maar geen OAuth-login kon slagen: sessiecookie `SameSite=Strict` verloor de state bij de terugkeer van de provider (nu `Lax`), een lege state kwam door de controle, geblokkeerde gebruikers kregen een nieuw account, netwerkfouten gaven een 500.
+- Nieuw: `modules/github`, `Core\Auth\OAuth\OAuthLoginFlow` (gedeelde flow voor alle vijf providers), `OAuthProviders` (knoppen alleen voor providers die aanstaan en Client ID + Secret hebben), `SafeRedirect`. Admin: Marketplace, Providers & API-instellingen; opslaan met sleutels schakelt de module in. Docs: `docs/oauth-login.md`. Geen migratie nodig.
+- Bewust geen automatische koppeling op e-mailadres (registratie controleert adressen niet).
+- Niet getest met echte sleutels bij GitHub/Google/Discord; wel end-to-end tegen een nep-provider (69 controles) en 100 PHPUnit-tests.
 
 ## Openstaande punten
 - README noemt de clone-URL `Bluprint-CMS` en de CI-badge `bluprint-cms` (typefout; de repo heet Blueprint-CMS).
