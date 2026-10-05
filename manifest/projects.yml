@@ -14,7 +14,7 @@ projects:
     depends_on: []
     deploys_to: ["extern:github-pages"]
     documents: ["scriptspace-cms", "scriptspace-releases", "blueprint-cms", "slayer-suite", "delvetracker", "wowtracker", "cursebot", "panicroom", "famfinder", "dieouwe-ai", "dieouwe-skills"]
-    docs: ["projects/project-brain.md", "CONTEXT.md", "docs/RAG-ARCHITECTURE.md"]
+    docs: ["projects/project-brain.md", "CONTEXT.md", "docs/RAG-ARCHITECTURE.md", "docs/OPENWEBUI-KENNISBANK.md"]
     last_checked: "2026-10-03"
     owner_skill: "wow-brain-manager"
     verified: "ja"

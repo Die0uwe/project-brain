@@ -1,0 +1,7 @@
+# Lokale sync-instellingen en -staat (bevatten een API-sleutel of server-id's): nooit committen
+.openwebui.env
+tools/.openwebui.env
+tools/.openwebui_state.json
+tools/.openwebui_state.tmp
+__pycache__/
+*.pyc
