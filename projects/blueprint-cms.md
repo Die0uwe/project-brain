@@ -1,7 +1,7 @@
 ---
 id: blueprint-cms
 type: repo
-bijgewerkt: 2026-10-03
+bijgewerkt: 2026-10-06
 bron_repo: Die0uwe/Blueprint-CMS
 ---
 # Blueprint CMS (voorheen Community Fusion CMS)
@@ -15,7 +15,7 @@ Modulair PHP-community-CMS voor gaming, streamers en gilden (guild management, W
 - Licentie GPL-3.0-or-later. Repo is publiek: https://github.com/Die0uwe/Blueprint-CMS
 
 ## Versie en status
-- Versie 1.28.0 (2026-09-30) op `main`.
+- Versie 1.34.0 (2026-10-06) op `main`; CI groen (PHP 8.3/8.4, PHPUnit, schema-import). Releases 1.29–1.34 staan in CHANGELOG.md.
 - Branch `plan/editors-plugins` loopt 16 commits voor op main (o.a. v1.28.1-beveiligingsfix voor pakketinstallatie, PluginManager, bericht-editor). Niet gemerged; staat niet in de changelog van main.
 
 ## Structuur
@@ -49,6 +49,15 @@ Modulair PHP-community-CMS voor gaming, streamers en gilden (guild management, W
 - Nieuw: `modules/github`, `Core\Auth\OAuth\OAuthLoginFlow` (gedeelde flow voor alle vijf providers), `OAuthProviders` (knoppen alleen voor providers die aanstaan en Client ID + Secret hebben), `SafeRedirect`. Admin: Marketplace, Providers & API-instellingen; opslaan met sleutels schakelt de module in. Docs: `docs/oauth-login.md`. Geen migratie nodig.
 - Bewust geen automatische koppeling op e-mailadres (registratie controleert adressen niet).
 - Niet getest met echte sleutels bij GitHub/Google/Discord; wel end-to-end tegen een nep-provider (69 controles) en 100 PHPUnit-tests.
+
+## Release 1.31 t/m 1.34 (2026-10-05/06)
+- 1.31-1.32: account samenvoegen (merge), API-instellingen per provider in het admin.
+- 1.33.0: blok `referral-links` (partner-/referral-links, `rel="sponsored nofollow noopener noreferrer"`, disclosure, max 20 links; standaardregels wijzen naar de homepages van Kling en Suno, eigen referral-links zelf invullen), klok-blok met grootte-slider (nieuw veldtype `range`) en cijfers, profielpagina breder.
+- 1.34.0 AI/Ollama: DeepSeek werkt via de ollama-module (R1-distills als `deepseek-r1:1.5b/7b/8b/14b/32b/70b`) of via Open WebUI (OpenAI-compatibel, bv. Cloudflare Tunnel naar de eigen pc, omdat Strato `localhost` van de pc niet kan bereiken). `Core\Ai\ThinkFilter` verwijdert `<think>`-blokken (ook gesplitst over stream-chunks, alleen aan het begin van een antwoord). Nieuw `OllamaConfig`, `OllamaClient` v1.1.0 met `diagnose()`, optionele reserve-AI (OpenAI-compatibel, alleen https, bv. DeepSeek cloud-API) en een knop "Verbinding testen" in Admin, Ollama AI. Sleutels versleuteld (AES-256-GCM), nooit naar de view of de blokken. Publiek chat-endpoint `/api/ollama/chat` geeft alleen generieke fouten; details in `error_log`.
+- Nieuw blok `ollama-chat` ("AI Chatbox", meerdere per pagina, `public/assets/js/cf-aichat.js`); verschijnt alleen als de ollama-module aanstaat. Migratie `20261006_02_ollama_module` zet die module aan als de rij nog ontbreekt.
+- Thema: standaard `layout_width` 1600 en `sidebar_width` 280; presets standaard 1600, ruim 1920, ultrawide 2560, superwide 3200, scherm (volledige breedte), compact 1200, magazine 1500. Migratie `20261006_03` verhoogt alleen nog-ongewijzigde oude standaarden (1280/260). Opgeslagen eigen waarden blijven; kies een preset in Admin, Thema-instellingen.
+- Docs: `docs/AI-DEEPSEEK.md` in de repo (installatie, VRAM-richtlijn, troubleshooting).
+- Bekend: `/api/ollama/summarize` en `/api/ollama/models` zijn publiek (alleen rate-limit). Niet gedaan: community-shoutbox (live ledenchat) als blok; eerst navragen of dat gewenst is.
 
 ## Openstaande punten
 - README noemt de clone-URL `Bluprint-CMS` en de CI-badge `bluprint-cms` (typefout; de repo heet Blueprint-CMS).

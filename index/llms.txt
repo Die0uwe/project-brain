@@ -2,7 +2,7 @@
 
 > Centrale kennisbank van Ouwe (Die0uwe): repos, sites, WoW-addons (Retail 12.0.5 Midnight), tools en AI's.
 > Lees eerst manifest/projects.yml, dan projects/<id>.md, en pas daarna de bron-repo. Geen geheimen in deze repo.
-> Laatste manifestcontrole: 2026-10-03. Regels met 'onbekend' zijn niet geverifieerd.
+> Laatste manifestcontrole: 2026-10-06. Regels met 'onbekend' zijn niet geverifieerd.
 
 ## Startpunten
 - [CONTEXT.md](CONTEXT.md): sessie-instructies en kritieke constanten
@@ -34,4 +34,4 @@
 - [docs/tokens-and-keys/](docs/tokens-and-keys/): HOE je tokens aanmaakt, nooit waarden
 - [docs/skills/skill-register.md](docs/skills/skill-register.md): wie beheert wat
 
-Totaal: 16 projecten, 255 chunks.
+Totaal: 16 projecten, 256 chunks.

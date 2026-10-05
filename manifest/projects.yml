@@ -58,12 +58,12 @@ projects:
     status: "actief"
     stack: "PHP 8.3+, MariaDB, Twig"
     description: "Modulair community-CMS voor gaming en gilden met 11 modules."
-    version: "1.28.0"
+    version: "1.34.0"
     depends_on: []
     deploys_to: []
     documents: []
     docs: ["projects/blueprint-cms.md"]
-    last_checked: "2026-10-03"
+    last_checked: "2026-10-06"
     owner_skill: "onbekend"
     verified: "ja"
 
