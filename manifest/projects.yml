@@ -266,7 +266,7 @@ projects:
     status: "in-ontwikkeling"
     stack: "Next.js + TypeScript + Drizzle + Postgres (ontwerp); PHP + MySQL (Strato-beta); Python (Discord-bot en tray)"
     description: "Eigen Nederlands CMS met geïntegreerde AI-chat; Strato-beta draait, hoofdlijn is nog ontwerp."
-    version: "0.8.1-beta (beta); bot 0.3.0, tray 0.1.0"
+    version: "0.8.2-beta (beta); bot 0.3.0, tray 0.1.0"
     depends_on: []
     deploys_to: ["extern:sbwebui.scriptspace.nl"]
     documents: []

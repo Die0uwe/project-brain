@@ -195,3 +195,18 @@ Oplossing: workflows handmatig aanmaken via GitHub UI.
 ### Lessen
 - Batch: `errorlevel` blijft staan over overgeslagen regels; gebruik vlagvariabelen en blokken met haakjes.
 - Playwright: `text=` is een substring-match, `inner_text` past CSS-hoofdletters toe.
+
+## 2026-10-11 (later) — SBWebUI v0.8.2: delen, mobiele chat, klok en versie
+
+### Gedaan
+- Open Graph- en Twitter Card-tags in de beta, per platform herkend aan de User-Agent van de crawler; Beheer → Delen met vier afbeeldingsformaten (alt-tekst verplicht), eigen tekst per platform en profieltags voor openbare profielen.
+- Mobiele chat: toetsenbord blijft dicht na een antwoord, vraag bovenaan, `visualViewport`-hoogte, compacte voet. Versie en klok (aan/uit) in de balk; zoeken boven een inklapbare gesprekkenlijst.
+- ADR-024 (RAG) voorgesteld en een stappenplan voor 2026-10-12 geschreven.
+
+### Bevindingen
+- Een crawler meldt zich niet als telefoon, tablet of laptop: de afbeelding hangt aan het platform, niet aan het apparaat. Een #-route (zoals een gesprek) bereikt de server niet, dus daar is geen link-voorbeeld mogelijk.
+- Het toetsenbord dat na elk antwoord weer openklapte (`focus()` op touch) bedekte het antwoord; `scrollTop = scrollHeight` bij elk stukje tekst liet het begin van een lang antwoord wegvallen.
+- Een REST-API voor Fooocus hoort volgens zoekresultaten bij het aparte project Fooocus-API; het vlagje `--api` uit een bijlage is niet bevestigd. Strato bereikt geen `host.docker.internal`, `localhost`, IP-adressen of `http`.
+
+### Lessen
+- Een bestaande profieltest verbood externe adressen in de pagina; een `rel=canonical`-link naar de eigen pagina is toegestaan en wordt niet geladen (test aangepast, niet de regel).
