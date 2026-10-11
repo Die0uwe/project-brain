@@ -94,8 +94,16 @@ wow-bigboss-orchestrator  ← commandopost (v2.1.0)
 | general-researcher | v1.x | Kennisbank | ✅ Actief |
 | data-grinder | v1.x | Kennisbank | ✅ Actief |
 | wow-oudedoos | v1.x | Kennisbank | ✅ Actief |
+| sbwebui-project | v1.x | SBWebUI | ✅ Actief (startpunt; bijwerking voorgesteld 2026-10-11) |
+| sbwebui-eval-perf | v1.x | SBWebUI | ✅ Actief |
+| sbwebui-next-architect | v1.x | SBWebUI | ✅ Actief |
+| sbwebui-cms-blocks | v1.x | SBWebUI | ✅ Actief |
+| sbwebui-docker-ops | v1.x | SBWebUI | ✅ Actief |
+| sbwebui-beta-bot | nieuw | SBWebUI | 🔶 Voorgesteld 2026-10-11 (Strato-beta, bot, tray); staat in de skills-lijst, nog niet door Ouwe beoordeeld |
 
-**Totaal: 32 actieve skills**
+**Totaal: 32 WoW/ecosysteem-skills plus 5 actieve en 1 voorgestelde SBWebUI-skill**
+
+Niet in deze tabel: `sbwebui-ai-hub`, `-auth`, `-model-router`, `-security`, `-streaming-runs`, `-ux-nl` bestaan als concept in de SBWebUI-repo (`skills/`) en zijn niet als actieve account-skill geverifieerd.
 
 ---
 
@@ -111,6 +119,7 @@ Nieuwe taak binnenkomt
     ├── WordPress/PHP              → code-architect → wp-sa-suite
     ├── GitHub push                → wow-git-manager
     ├── Kennisbank update GitHub   → wow-brain-manager
+    ├── SBWebUI (alles)            → sbwebui-project eerst, daarna gerichte sbwebui-* skill
     ├── Data/IDs opzoeken          → wow-oudedoos (ALTIJD EERST)
     ├── Visueel/UI                 → design-architect → wow-ui-polish
     ├── Sessie afsluiten           → wow-session-closer

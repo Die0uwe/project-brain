@@ -179,3 +179,19 @@ Oplossing: workflows handmatig aanmaken via GitHub UI.
 ### Lessen
 - Een gitignored bestand dat de build nodig heeft laat CI breken terwijl het lokaal werkt; gebruik de standaard debug-keystore.
 - Bouwen van Android-apps kan niet in de Claude-sandbox (Maven/Google geblokkeerd); gebruik GitHub Actions.
+
+## 2026-10-11 — SBWebUI Strato-beta v0.8.0 en v0.8.1, Discord-bot en tray
+
+### Gedaan
+- Beta v0.8.0: Beheer → Discord-bot opnieuw gebouwd (status, kanaalkeuze, alarmen in privékanaal, eigen `!commando's`), bot v0.3.0 en tray-starter v0.1.0 (Start/Stop/Herstart ook vanaf de site). Schema 9.
+- Beta v0.8.1: avatar-schuiven 12 tot 180 px (oude maximum op 50%), login-tunnel met perspectief en trager tempo, handleidingen en updates ook als HTML (`tools/build-docs-html.py`), `start-tray.bat` herschreven.
+- Docs, README en ADR-023 gelijkgetrokken; skills-plan met voorstel `sbwebui-beta-bot`.
+
+### Bevindingen
+- `start-tray.bat` meldde "Installeren mislukt" ten onrechte: `errorlevel` bleef 1 na een mislukte import-controle, de venv-stap werd overgeslagen (map bestond al) en `if errorlevel 1` sprong toch naar de foutmelding. Niet getest op Windows.
+- Tests: tray 31/31, beta 57/57, v0.5 28/28, nieuwe display-test 12/12. Bekende basisfouten zonder verband: favicon.ico-controle en OAuth-tests (https/http in de testomgeving).
+- Audit bot (security): HMAC met `hash_equals`, tijdvenster 300 s, ratelimit, alleen drie vaste tray-opdrachten. Zwakte: replay binnen 5 minuten geeft alleen het antwoord prijs, geen uitvoering.
+
+### Lessen
+- Batch: `errorlevel` blijft staan over overgeslagen regels; gebruik vlagvariabelen en blokken met haakjes.
+- Playwright: `text=` is een substring-match, `inner_text` past CSS-hoofdletters toe.

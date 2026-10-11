@@ -2,7 +2,7 @@
 
 > Centrale kennisbank van Ouwe (Die0uwe): repos, sites, WoW-addons (Retail 12.0.5 Midnight), tools en AI's.
 > Lees eerst manifest/projects.yml, dan projects/<id>.md, en pas daarna de bron-repo. Geen geheimen in deze repo.
-> Laatste manifestcontrole: 2026-10-06. Regels met 'onbekend' zijn niet geverifieerd.
+> Laatste manifestcontrole: 2026-10-11. Regels met 'onbekend' zijn niet geverifieerd.
 
 ## Startpunten
 - [CONTEXT.md](CONTEXT.md): sessie-instructies en kritieke constanten
@@ -27,6 +27,7 @@
 - [PanicRoom CMS](projects/panicroom.md) [repo, in-ontwikkeling]: Windows-hardwarescan (JSON) met dashboard voor overzicht, prestaties en updateadvies; geen automatische installaties (privé repo).
 - [scriptspace-releases](projects/scriptspace-releases.md) [repo, actief]: Publiek releasekanaal voor de updater van ScriptSpace CMS.
 - [WowTracker (Slayer Alliance Edition)](projects/wowtracker.md) [addon, actief-volgens-brain]: Actuele multi-plugin warband-tracker met 11 thema's en 5 talen; opvolger van de DelveTracker-repo.
+- [SBWebUI](projects/sbwebui.md) [repo, in-ontwikkeling]: Eigen Nederlands CMS met geïntegreerde AI-chat; Strato-beta draait, hoofdlijn is nog ontwerp.
 
 ## Kennis
 - [docs/knowledge/](docs/knowledge/): WoW-IDs, bugs, kompaswiskunde, sessie-lessen
@@ -34,4 +35,4 @@
 - [docs/tokens-and-keys/](docs/tokens-and-keys/): HOE je tokens aanmaakt, nooit waarden
 - [docs/skills/skill-register.md](docs/skills/skill-register.md): wie beheert wat
 
-Totaal: 16 projecten, 265 chunks.
+Totaal: 17 projecten, 275 chunks.

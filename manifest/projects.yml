@@ -13,7 +13,7 @@ projects:
     version: "onbekend"
     depends_on: []
     deploys_to: ["extern:github-pages"]
-    documents: ["scriptspace-cms", "scriptspace-releases", "blueprint-cms", "slayer-suite", "delvetracker", "wowtracker", "cursebot", "panicroom", "famfinder", "dieouwe-ai", "dieouwe-skills"]
+    documents: ["scriptspace-cms", "scriptspace-releases", "blueprint-cms", "slayer-suite", "delvetracker", "wowtracker", "cursebot", "panicroom", "famfinder", "sbwebui", "dieouwe-ai", "dieouwe-skills"]
     docs: ["projects/project-brain.md", "CONTEXT.md", "docs/RAG-ARCHITECTURE.md", "docs/OPENWEBUI-KENNISBANK.md"]
     last_checked: "2026-10-03"
     owner_skill: "wow-brain-manager"
@@ -257,4 +257,20 @@ projects:
     docs: ["projects/wowtracker.md", "docs/knowledge/session-history.md"]
     last_checked: "2026-10-03"
     owner_skill: "wow-addon-architect"
+    verified: "ja"
+
+  - id: "sbwebui"
+    type: "repo"
+    name: "SBWebUI"
+    url: "https://github.com/Die0uwe/SBwebui"
+    status: "in-ontwikkeling"
+    stack: "Next.js + TypeScript + Drizzle + Postgres (ontwerp); PHP + MySQL (Strato-beta); Python (Discord-bot en tray)"
+    description: "Eigen Nederlands CMS met geïntegreerde AI-chat; Strato-beta draait, hoofdlijn is nog ontwerp."
+    version: "0.8.1-beta (beta); bot 0.3.0, tray 0.1.0"
+    depends_on: []
+    deploys_to: ["extern:sbwebui.scriptspace.nl"]
+    documents: []
+    docs: ["projects/sbwebui.md"]
+    last_checked: "2026-10-11"
+    owner_skill: "wow-bigboss-orchestrator"
     verified: "ja"
