@@ -14,7 +14,7 @@ Eigen Nederlands CMS met geïntegreerde AI-chat en code-modus: de AI-chat is het
 - **Strato-beta (`beta-strato/`, PHP + MySQL):** werkende site op https://sbwebui.scriptspace.nl/, bedoeld om het ontwerp in de praktijk te proberen. Ollama draait op Ouwe's eigen pc.
 
 ## Versie en status (2026-10-11)
-- Beta v0.8.2-beta, databaseschema 9. Nieuw in 0.8.2: Open Graph/Twitter Card-tags per platform (Beheer → Delen), mobiele chat gefixt (toetsenbord, vraag bovenaan), versie en klok bovenin, zoeken boven inklapbare gesprekkenlijst.
+- Beta v0.8.3-beta, databaseschema 10. Nieuw in 0.8.3: RAG v1 op de Bibliotheek (categorieën en subcategorieën, één samengevoegd document per gepubliceerde pagina, MySQL FULLTEXT, bronnen onder het antwoord; ADR-024 blijft voorstel, embeddings later) en een vloeiendere login-tunnel. Eerder in 0.8.2: Open Graph/Twitter Card-tags per platform (Beheer → Delen), mobiele chat gefixt (toetsenbord, vraag bovenaan), versie en klok bovenin, zoeken boven inklapbare gesprekkenlijst.
 - Eerder in 0.8.1: Nieuw in 0.8.0: Beheer, Discord-bot, kanaalkeuze, alarmen in een privékanaal, eigen `!commando's`. Nieuw in 0.8.1: avatar-schuiven 12 tot 180 px, login-tunnel met perspectief en trager tempo, handleidingen als HTML.
 - Discord-bot v0.3.0 en tray-starter v0.1.0 in `tools/discord-bot/` (ADR-023: bot beheerd vanuit het paneel; gebouwd in de beta, voorstel voor de hoofdlijn).
 - Hosting: Strato voor de beta, Docker voor de hoofdlijn (besluit van Ouwe, ADR-010).
