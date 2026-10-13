@@ -1,7 +1,7 @@
 ---
 id: blueprint-cms
 type: repo
-bijgewerkt: 2026-10-06
+bijgewerkt: 2026-10-13
 bron_repo: Die0uwe/Blueprint-CMS
 ---
 # Blueprint CMS (voorheen Community Fusion CMS)
@@ -15,7 +15,8 @@ Modulair PHP-community-CMS voor gaming, streamers en gilden (guild management, W
 - Licentie GPL-3.0-or-later. Repo is publiek: https://github.com/Die0uwe/Blueprint-CMS
 
 ## Versie en status
-- Versie 1.34.0 (2026-10-06) op `main`; CI groen (PHP 8.3/8.4, PHPUnit, schema-import). Releases 1.29–1.34 staan in CHANGELOG.md.
+- Versie 1.36.0 op `main` (2026-10-13 fast-forward gelijkgezet met branch `feature/backup-1.36.0`, commit 5673857, daarna README-commit 8e734f9). Live op cms.scriptspace.nl draait 1.36.0 (VERIFIED via `/api/v1/status`, 2026-10-13). Releases 1.29–1.36 staan in CHANGELOG.md; onder *Unreleased* staan HTML-pagina's in thema-stijl en de nieuwe footer.
+- `main` liep tot 2026-10-13 achter (1.34.0) terwijl 1.35/1.36 alleen op feature-branches stonden. Les: na een release de feature-branch direct naar `main` brengen.
 - Branch `plan/editors-plugins` loopt 16 commits voor op main (o.a. v1.28.1-beveiligingsfix voor pakketinstallatie, PluginManager, bericht-editor). Niet gemerged; staat niet in de changelog van main.
 
 ## Structuur
@@ -49,6 +50,14 @@ Modulair PHP-community-CMS voor gaming, streamers en gilden (guild management, W
 - Nieuw: `modules/github`, `Core\Auth\OAuth\OAuthLoginFlow` (gedeelde flow voor alle vijf providers), `OAuthProviders` (knoppen alleen voor providers die aanstaan en Client ID + Secret hebben), `SafeRedirect`. Admin: Marketplace, Providers & API-instellingen; opslaan met sleutels schakelt de module in. Docs: `docs/oauth-login.md`. Geen migratie nodig.
 - Bewust geen automatische koppeling op e-mailadres (registratie controleert adressen niet).
 - Niet getest met echte sleutels bij GitHub/Google/Discord; wel end-to-end tegen een nep-provider (69 controles) en 100 PHPUnit-tests.
+
+## Footer in ScriptSpace-stijl (2026-10-13, op main, nog geen release)
+- `themes/default/templates/layout.twig`: standaardfooter met regenbooglijn, merkkolom (logo + site_name), kolommen *Deze site* (nieuws, forum, downloads, galerij), *ScriptSpace* (cms, CoreBot, SBWebUI, Discord) en *Over* (contact, DieOuwe, GitHub). Zelfde opzet als de CoreBot-site (corebot.info) en scriptspace.nl.
+- Onderregel `.cf-footline` (copyright, `cms_version`, "gratis en reclamevrij") staat **altijd**, ook als de footer-grid-builder (thema-instellingen) eigen cellen heeft; bewust niet via de admin uit te zetten. Wie Blueprint zelf installeert, past de kolommen aan via de grid-builder.
+- CSS onderaan de footer-grid-sectie in `public/assets/css/blueprint.css`; `#cf-footer>.cf-container{display:block}` is nodig omdat `.cf-container` een flex-rij is. Koppen gebruiken thematokens (`--link`, `--success`, `--gold`), dus alle 8 thema's en licht/donker werken.
+- Teksten `footer.*` in `lang/nl.php`, `en.php`, `de.php`.
+- `blueprint.css` wordt zonder versie-query geladen: na upload Cloudflare-cache legen of Ctrl+F5.
+- FTP-update (lokaal): `blueprint/blueprint-1.36.0-footer-update.zip` onder `C:\SERVERS\DIEOUWE-AI`.
 
 ## Release 1.31 t/m 1.34 (2026-10-05/06)
 - 1.31-1.32: account samenvoegen (merge), API-instellingen per provider in het admin.

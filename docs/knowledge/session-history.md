@@ -1,5 +1,5 @@
 # Sessie History — DieOuwe Ecosysteem
-> Beslissingen, lessen en project state per sessie · Laatste update: 2026-10-03
+> Beslissingen, lessen en project state per sessie · Laatste update: 2026-10-13
 
 ---
 
@@ -210,3 +210,20 @@ Oplossing: workflows handmatig aanmaken via GitHub UI.
 
 ### Lessen
 - Een bestaande profieltest verbood externe adressen in de pagina; een `rel=canonical`-link naar de eigen pagina is toegestaan en wordt niet geladen (test aangepast, niet de regel).
+
+## 2026-10-13 — Footer in ScriptSpace-stijl, Blueprint main gelijk, famfinder-analyse
+
+### Gedaan
+- De footer van de CoreBot-site (v0.3.2) nagebouwd voor scriptspace.nl (scriptspace-cms 0.26.1) en cms.scriptspace.nl (Blueprint CMS); FTP-zips lokaal klaargezet, uploaden doet Ouwe. Zie `projects/scriptspace-cms.md` en `projects/blueprint-cms.md`.
+- Blueprint `main` fast-forward van 1.34.0 naar 1.36.0 (gelijk aan live); README's en handleiding van beide repo's bijgewerkt.
+- SpotFam-debug-APK geanalyseerd en advies gegeven over een gratis backend (`projects/famfinder.md`).
+
+### Bevindingen
+- `transform: scale()` telt niet mee in de opmaak: inhoud eronder (zoals een footer) overlapt. `zoom` telt wel mee; percentages blijven dan ongeschaald, `vh` niet, dus `min-height: calc(100dvh / 1.2)`.
+- In Blueprint is `.cf-container` een flex-rij; een footer met meerdere blokken erin heeft `display:block` nodig.
+- Live versies zijn af te lezen zonder login: Blueprint via `/api/v1/status`, scriptspace via `<meta name="ss-version">`.
+- `scriptspace-cms` en `famfinder` zijn privé (GitHub-API geeft 404 zonder login); `Blueprint-CMS` en `project-brain` zijn publiek.
+
+### Lessen
+- Geen links naar privé-repo's op publieke pagina's (eerst gemaakt, daarna gecorrigeerd).
+- Na een release de feature-branch direct naar `main` brengen; anders lopen GitHub en de brain achter op wat live draait.

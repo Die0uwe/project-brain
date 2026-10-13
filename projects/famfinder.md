@@ -1,7 +1,7 @@
 ---
 id: famfinder
 type: repo
-bijgewerkt: 2026-10-03
+bijgewerkt: 2026-10-13
 bron_repo: Die0uwe/famfinder
 ---
 # famfinder (app SpotFam)
@@ -23,10 +23,19 @@ Android-app "SpotFam": familie en vrienden delen hun locatie met privacy, veilig
 - Lokale bouw vereist Android SDK en toegang tot Google/Maven; in de cloud-sandbox van Claude niet mogelijk, dus bouwen gaat via GitHub Actions.
 - Installeren op een telefoon: artifact downloaden, "onbekende bronnen" toestaan, Play Protect-waarschuwing bij debug-APK accepteren. Een eerdere installatie met een andere debug-sleutel eerst verwijderen.
 
+## Plan (advies 2026-10-13, gratis route)
+- Backend op de eigen server (Docker + Cloudflare Tunnel) voor accounts, familiegroep, live locatie en chat; Firebase Cloud Messaging alleen voor push/SOS (gratis).
+- Echte kaart met OpenStreetMap (osmdroid of MapLibre), geen API-sleutel nodig.
+- Achtergrondlocatie via een foreground service; dit is het lastigste deel (Android-beperkingen, Play-beleid).
+- Videobellen later (Jitsi-link). Verspreiden: APK zelf delen is gratis; Play Store kost eenmalig $25 en keurt achtergrondlocatie streng.
+- Locatie van kinderen is AVG-gevoelig: data thuis houden.
+- Eerste versie (MVP): login, familie aanmaken, live locatie op een echte kaart, chat, SOS-push. Start gepland 2026-10-14.
+
 ## Belangrijke beslissingen
 - 2026-10-03: de debug-build verwees naar een keystore die in `.gitignore` staat en dus ontbrak, waardoor `assembleDebug` in CI faalde. Opgelost door de standaard debug-keystore van de Android Gradle Plugin te gebruiken en de release-signing alleen actief te maken als een `STORE_PASSWORD`-secret bestaat (commit beb7209, via branch `fix/debug-apk-build` naar main).
 
 ## Openstaande punten
 - `google-services.json` ontbreekt (staat niet in de repo): Firebase- en Gemini-functies werken pas na toevoegen.
-- Het bouwresultaat is in CI gelukt (artifact ca. 28 MB); de APK is nog niet op een toestel getest.
+- De debug-APK is door Ouwe op een telefoon getest (2026-10-13); hij werkt als demo.
+- **Geen backend** (VERIFIED, analyse van de APK 2026-10-13): alle gegevens staan lokaal in Room met nepdata (bijv. testnummers); Firebase-bibliotheken zitten erin maar de app-code roept ze niet aan. Twee telefoons zien elkaar dus niet. Videobellen is een demo (vaste `videoplayback.mp4`). De uitnodigingslink `https://spotfam.app/join/...` bestaat alleen in de app.
 - Geen README in de repo.

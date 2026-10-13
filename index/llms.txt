@@ -2,7 +2,7 @@
 
 > Centrale kennisbank van Ouwe (Die0uwe): repos, sites, WoW-addons (Retail 12.0.5 Midnight), tools en AI's.
 > Lees eerst manifest/projects.yml, dan projects/<id>.md, en pas daarna de bron-repo. Geen geheimen in deze repo.
-> Laatste manifestcontrole: 2026-10-11. Regels met 'onbekend' zijn niet geverifieerd.
+> Laatste manifestcontrole: 2026-10-13. Regels met 'onbekend' zijn niet geverifieerd.
 
 ## Startpunten
 - [CONTEXT.md](CONTEXT.md): sessie-instructies en kritieke constanten
@@ -13,7 +13,7 @@
 ## Projecten
 - [project-brain](projects/project-brain.md) [repo, actief]: Centrale AI-kennisbank en RAG-bron voor het hele ecosysteem.
 - [ScriptSpace CMS](projects/scriptspace-cms.md) [repo, in-ontwikkeling]: Accounts, AI-playground, sandboxes, admin en updater achter scriptspace.nl (privé repo).
-- [scriptspace.nl](projects/scriptspace-nl.md) [site, live-versie-onbekend]: Persoonlijke website van Ouwe, live uitrol van ScriptSpace CMS.
+- [scriptspace.nl](projects/scriptspace-nl.md) [site, live]: Persoonlijke website van Ouwe, live uitrol van ScriptSpace CMS.
 - [Blueprint CMS](projects/blueprint-cms.md) [repo, actief]: Modulair community-CMS voor gaming en gilden met 11 modules.
 - [Blueprint CMS module ai-studio](projects/blueprint-cms-ai-studio.md) [tool, in-review]: Module ai-studio: chat met AI-providers en eigen editor met diff-voorstel (PR #1, branch feature/ai-studio).
 - [Slayer Alliance Master Suite](projects/slayer-suite.md) [repo, actief-volgens-brain]: WordPress-plugin voor slayeralliance.com (armory, roster, recruitment, Discord).
@@ -35,4 +35,4 @@
 - [docs/tokens-and-keys/](docs/tokens-and-keys/): HOE je tokens aanmaakt, nooit waarden
 - [docs/skills/skill-register.md](docs/skills/skill-register.md): wie beheert wat
 
-Totaal: 17 projecten, 277 chunks.
+Totaal: 17 projecten, 281 chunks.
