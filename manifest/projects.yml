@@ -266,11 +266,11 @@ projects:
     status: "in-ontwikkeling"
     stack: "Next.js + TypeScript + Drizzle + Postgres (ontwerp); PHP + MySQL (Strato-beta); Python (Discord-bot en tray)"
     description: "Eigen Nederlands CMS met geïntegreerde AI-chat en Beeldmaker (eigen Fooocus via de beeldserver); Strato-beta draait, hoofdlijn is nog ontwerp. Muziekmaker (ACE-Step) voorgesteld."
-    version: "0.9.23-beta (beta); beeldserver 0.1.5; CoreBot 0.5.7 live, 0.7.0 test"
+    version: "0.9.27-beta (0.9.26 live); beeldserver 0.1.6, muziekserver 0.1.0; CoreBot 0.5.7 live, 0.7.2 test"
     depends_on: []
     deploys_to: ["extern:sbwebui.scriptspace.nl"]
     documents: []
     docs: ["projects/sbwebui.md"]
-    last_checked: "2026-10-18"
+    last_checked: "2026-10-19"
     owner_skill: "wow-bigboss-orchestrator"
     verified: "ja"

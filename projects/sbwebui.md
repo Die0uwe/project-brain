@@ -1,7 +1,7 @@
 ---
 id: sbwebui
 type: repo
-bijgewerkt: 2026-10-18
+bijgewerkt: 2026-10-19
 bron_repo: Die0uwe/SBwebui
 ---
 # SBWebUI
@@ -12,6 +12,16 @@ Eigen Nederlands CMS met geïntegreerde AI-chat en code-modus: de AI-chat is het
 ## Twee sporen
 - **Hoofdlijn (Next.js, TypeScript strict, Drizzle, Postgres + pgvector, SSE):** ontwerp en besluiten (ADR-001 t/m ADR-023 in `docs/besluiten.md`), nog geen productie. De meeste ADR's zijn *voorstel*; alleen wat als *besloten door Ouwe* staat telt als besluit.
 - **Strato-beta (`beta-strato/`, PHP + MySQL):** werkende site op https://sbwebui.scriptspace.nl/, bedoeld om het ontwerp in de praktijk te proberen. Ollama draait op Ouwe's eigen pc.
+
+## Stand 2026-10-19
+- **Muziekmaker gebouwd (ADR-030):** muziekserver op de pc (ACE-Step 1.5, MIT) via muziek.scriptspace.nl, één GPU-slot gedeeld met de beeldserver
+  (nooit tegelijk; voor muziek gaat Fooocus even uit, de beeldserver zet hem zelf weer aan). Meting RTX 4060 (8 GB): 30 s muziek in ±48 s, 2 min in ±168 s,
+  piek 6,8–7,8 GB. Les: alle ACE-Step-modellen na hun stap uit het videogeheugen (offload), anders decodeert de VAE op de processor (>20 min).
+- **SBWebUI 0.9.24 – 0.9.27:** muziekkaart in de chat, Mijn muziek (privé / link / openbaar), eigen muziekstijlen, Galerij met tab Muziek, blokken Galerij en
+  Muziek (verticaal of horizontaal), rechten per lid. Assistent SunoCat (Ollama-model `sunocat`) schrijft titel, stijl en songtekst; OWLAI en SunoCat krijgen
+  alleen de opdracht uit hun eigen model (een kleine 4B raakt anders de vaste antwoordvorm kwijt). Core AI stuurt beeld- en muziekvragen door naar die twee.
+- **CoreBot 0.7.2 (test):** 10 plugins, nieuw `/zing` (Zingen), knopbericht op vaste tijden voor Tekenen en Zingen, en `/menu` als klikbare index
+  (beeld, liedje, voorlezen voorbereid, voorkeuren en serverinstellingen op corebot.info). corebot.info 0.5.2 heeft de instellingen.
 
 ## Stand 2026-10-18
 - **Beta 0.9.23** live op sbwebui.scriptspace.nl. Sinds 0.9.8: kennisbank met AI-indeling, dicteren, DeepSeek-reserve, webzoeken via eigen SearXNG en de **Beeldmaker**.
