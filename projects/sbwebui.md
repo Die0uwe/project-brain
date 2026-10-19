@@ -17,8 +17,8 @@ Eigen Nederlands CMS met geïntegreerde AI-chat en code-modus: de AI-chat is het
 - **Muziekmaker gebouwd (ADR-030):** muziekserver op de pc (ACE-Step 1.5, MIT) via muziek.scriptspace.nl, één GPU-slot gedeeld met de beeldserver
   (nooit tegelijk; voor muziek gaat Fooocus even uit, de beeldserver zet hem zelf weer aan). Meting RTX 4060 (8 GB): 30 s muziek in ±48 s, 2 min in ±168 s,
   piek 6,8–7,8 GB. Les: alle ACE-Step-modellen na hun stap uit het videogeheugen (offload), anders decodeert de VAE op de processor (>20 min).
-- **SBWebUI 0.9.24 – 0.9.27:** muziekkaart in de chat, Mijn muziek (privé / link / openbaar), eigen muziekstijlen, Galerij met tab Muziek, blokken Galerij en
-  Muziek (verticaal of horizontaal), rechten per lid. Assistent SunoCat (Ollama-model `sunocat`) schrijft titel, stijl en songtekst; OWLAI en SunoCat krijgen
+- **SBWebUI 0.9.24 – 0.9.28:** muziekkaart in de chat, Mijn muziek (privé / link / openbaar), eigen muziekstijlen, **Sound Lib** (eigen pagina voor
+  openbare muziek) met deelpagina per nummer (speler, Open Graph met geluid, deelknoppen, naar Discord), blokken Galerij en Muziek (verticaal of horizontaal), rechten per lid. Assistent SunoCat (Ollama-model `sunocat`) schrijft titel, stijl en songtekst; OWLAI en SunoCat krijgen
   alleen de opdracht uit hun eigen model (een kleine 4B raakt anders de vaste antwoordvorm kwijt). Core AI stuurt beeld- en muziekvragen door naar die twee.
 - **CoreBot 0.7.2 (test):** 10 plugins, nieuw `/zing` (Zingen), knopbericht op vaste tijden voor Tekenen en Zingen, en `/menu` als klikbare index
   (beeld, liedje, voorlezen voorbereid, voorkeuren en serverinstellingen op corebot.info). corebot.info 0.5.2 heeft de instellingen.
