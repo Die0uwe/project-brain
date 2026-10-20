@@ -13,6 +13,19 @@ Eigen Nederlands CMS met geïntegreerde AI-chat en code-modus: de AI-chat is het
 - **Hoofdlijn (Next.js, TypeScript strict, Drizzle, Postgres + pgvector, SSE):** ontwerp en besluiten (ADR-001 t/m ADR-023 in `docs/besluiten.md`), nog geen productie. De meeste ADR's zijn *voorstel*; alleen wat als *besloten door Ouwe* staat telt als besluit.
 - **Strato-beta (`beta-strato/`, PHP + MySQL):** werkende site op https://sbwebui.scriptspace.nl/, bedoeld om het ontwerp in de praktijk te proberen. Ollama draait op Ouwe's eigen pc.
 
+## Stand 2026-10-20
+
+- **Beeldserver 0.3.0 (pc):** drie motoren, om de beurt (nooit samen in het geheugen): **Fooocus** (SDXL, stijlen, referentiefoto), **Flux.1 schnell**
+  (ComfyUI, volgt de zin letterlijk) en **video** (Wan 2.2 TI2V 5B, 2 s, 480p of 720p, ook beeld naar video). Eigen wachtrij-regels voor video
+  (beelden gaan voor, max 3, 1 per persoon). Fooocus V2-uitbreiding uit (behalve foto) en hogere CFG: opdrachten worden strakker gevolgd.
+  OWLAI kiest de motor; een vangnet in de beeldserver kiest Flux bij bekende schepen/gebouwen, "rent weg", tekst in beeld.
+- **SBWebUI 0.9.34 – 0.9.37:** motorkeuze (Automatisch/Fooocus/Flux/🎬 Video) in de beeldkaart, video met speler en mp4-download,
+  **Laat bewegen** (beeld naar video), menu **Media** (Galerij, Sound Lib, Video's), video's delen naar Discord als mp4-bijlage. Live: 0.9.36.
+- **CoreBot (testbot):** Tekenen 1.4.0 met `/video` (480p, simpel) en knop Laat bewegen; voor 720p en eigen beweging verwijst de bot naar SBWebUI.
+- **Controlepaneel:** tab Beelden en video, Flux-kaart, ComfyUI-modellen, inklapbare video-balk.
+- Geleerd: op Windows duurt verbinden met een dichte poort ±2 s (health-checks kort en tegelijk); Discord laat een interactie maar 15 min
+  bijwerken (bij video het bericht zelf bijwerken); een Discord-embed kan geen video tonen (mp4 als bijlage).
+
 ## Stand 2026-10-19
 - **Muziekmaker gebouwd (ADR-030):** muziekserver op de pc (ACE-Step 1.5, MIT) via muziek.scriptspace.nl, één GPU-slot gedeeld met de beeldserver
   (nooit tegelijk; voor muziek gaat Fooocus even uit, de beeldserver zet hem zelf weer aan). Meting RTX 4060 (8 GB): 30 s muziek in ±48 s, 2 min in ±168 s,
