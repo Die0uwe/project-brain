@@ -265,12 +265,12 @@ projects:
     url: "https://github.com/Die0uwe/SBwebui"
     status: "in-ontwikkeling"
     stack: "Next.js + TypeScript + Drizzle + Postgres (ontwerp); PHP + MySQL (Strato-beta); Python (Discord-bot en tray)"
-    description: "Eigen Nederlands CMS met geïntegreerde AI-chat en Beeldmaker (eigen Fooocus via de beeldserver); Strato-beta draait, hoofdlijn is nog ontwerp. Muziekmaker (ACE-Step) voorgesteld."
-    version: "0.9.28-beta (0.9.26 live); beeldserver 0.1.6, muziekserver 0.1.0; CoreBot 0.5.7 live, 0.7.2 test"
+    description: "Eigen Nederlands CMS met geïntegreerde AI-chat, Beeldmaker, Muziekmaker, Kaartenmaker, hitlijst en Corebot Radio; Strato-beta draait, hoofdlijn is nog ontwerp."
+    version: "0.9.64-beta live; corebot.info 0.5.4 live; CoreBot 0.7.2 live; beeldserver 0.4.2, muziekserver 0.1.2"
     depends_on: []
     deploys_to: ["extern:sbwebui.scriptspace.nl"]
     documents: []
     docs: ["projects/sbwebui.md"]
-    last_checked: "2026-10-19"
+    last_checked: "2026-11-01"
     owner_skill: "wow-bigboss-orchestrator"
     verified: "ja"

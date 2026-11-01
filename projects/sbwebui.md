@@ -1,7 +1,7 @@
 ---
 id: sbwebui
 type: repo
-bijgewerkt: 2026-10-19
+bijgewerkt: 2026-11-01
 bron_repo: Die0uwe/SBwebui
 ---
 # SBWebUI
@@ -12,6 +12,28 @@ Eigen Nederlands CMS met geïntegreerde AI-chat en code-modus: de AI-chat is het
 ## Twee sporen
 - **Hoofdlijn (Next.js, TypeScript strict, Drizzle, Postgres + pgvector, SSE):** ontwerp en besluiten (ADR-001 t/m ADR-023 in `docs/besluiten.md`), nog geen productie. De meeste ADR's zijn *voorstel*; alleen wat als *besloten door Ouwe* staat telt als besluit.
 - **Strato-beta (`beta-strato/`, PHP + MySQL):** werkende site op https://sbwebui.scriptspace.nl/, bedoeld om het ontwerp in de praktijk te proberen. Ollama draait op Ouwe's eigen pc.
+
+## Stand 2026-11-01
+
+Live: **SBWebUI 0.9.64-beta** (schema 25), **corebot.info 0.5.4** (0.5.5 in de maak), **CoreBot 0.7.2** met 11 plugins. Op de pc: beeldserver 0.4.2, muziekserver 0.1.2, ComfyUI 0.42.0, controlepaneel met ComfyUI-kaart. Actuele taken: `SB open AI\STAPPENPLAN-2026-11-01.md` op de pc.
+
+- **SBWebUI 0.9.45 – 0.9.58:** nieuwe startpagina, Core AI als maatje met geheugen per lid, eigen beelden uploaden en bewerken, Bewerk & tekst en Logo maken, eigen MP3 met covers, 18+ beoordelen door beheer, standaardmotor, kleine covers (480 px).
+- **Kaartenmaker (`/cardBuilder/`, 0.9.59 – 0.9.61):** losse pagina voor kaarten per seizoen (kerst, Sinterklaas, oud en nieuw, Valentijn): foto, tekst, versiering, effecten, AI-beeld, transparante kerstkransen met schuif, thema's van de site, Open Graph-kaartje. Zonder account maken en downloaden; AI en opslaan na inloggen. Kransen maken: `tools/kaarten/krans.py`.
+- **Corebot Radio (plugin 1.0.0, 0.9.62):** `/radio start` in een spraakkanaal, muziek uit `rss.php?radio=1` (tot 200 nummers). Openbare AI-nummers gaan vanzelf mee; eigen uploads alleen na aanmelden met rechten-vinkje en keuring in Beheer › Radio keuren. Standaard uit, per server aan via corebot.info, alleen voor wie de server mag beheren, max. 3 servers tegelijk, stopt als het kanaal leeg is. Nodig: PyNaCl, davey en ffmpeg. In een spraakkanaal getest door Ouwe.
+- **Hitlijst (0.9.63):** `hitlijst.php` en corebot.info `#/hitlijst`: Top 10, 25 en 40 op stemmen van de laatste 30 dagen. Stemmen kan alleen in de Sound Lib; een stemknop in Discord is niet gebouwd.
+- **Zenders (0.9.64):** eigen lijsten, alleen door beheer, in de instelling `radio_stations`; `zenders.php` en `rss.php?radio=1&zender=<id>`. Keuze bij `/radio start`. Radioregels blijven gelden.
+- **CoreBot live:** 0.7.2 met embed, event, gepland, meldingen, menu, radio, rollen, spellen, teken, welkom en zing. Teken, zing en radio staan standaard uit. Geen `PLUGINS_ON` op live, want dat zet plugins aan op elke server zonder eigen instelling. Zingen 1.2.0 heeft de knop Cover maken via Tekenen; `/video` en Laat bewegen zitten op slot.
+- **Besluit, nog niet gebouwd:** eigen stem bij muziek alleen voor admin en moderators, alleen eigen stem live opgenomen, privé en wisbaar. Eerst een proef met Applio (RVC) en Demucs in `D:\DIEOUWE-AI\stemlab`.
+- **Veiligheid:** 18+ nooit van uploads of echte personen, alleen volledig AI-gemaakte, duidelijk volwassen figuren; animatie nooit 18+.
+- **Documentatie:** wiki-bronnen staan in `wiki-docs\pages`; Ouwe draait `wiki-sync.bat` zelf, Claude logt niet in op de wiki. Zips uploadt Ouwe zelf.
+
+Gemeten en geleerd:
+- **`kill_port`:** op deze pc is de status bij `Get-NetTCPConnection` leeg, dus `-State Listen` vindt niets (`netstat` ook niet goed). Zonder dat filter stoppen ComfyUI en ACE-Step echt: gereserveerd geheugen van 84 naar ±48 GB, en dat loste het vastlopen op.
+- **Ollama op de processor:** na een pc-herstart kan Ollama de videokaart missen (`server.log`: `inference compute library=cpu`, `api/ps`: `size_vram` 0). OWLAI duurt dan 37 – 115 s in plaats van seconden en de bot meldde "kon de opdracht niet lezen". Het paneel herstart Ollama nu zelf (alleen zonder geladen model, max. 3 keer).
+- **Dubbel paneel:** op Windows staat `SO_REUSEADDR` meerdere programma's op één poort toe, dus een oud paneel bleef antwoorden naast het nieuwe. Het paneel zet `allow_reuse_address` nu uit en weigert een tweede start.
+- **Flux `--fast` (een meetreeks, warme schijfcache):** zonder 47 / 22 / 22 s, met 64 / 18 / 18 s. Staat uit. Warm was op 29-10 nog 54 – 71 s.
+- **Docker:** Model Runner uit en `.wslconfig` op 6 GB. Nooit `docker model ...` draaien: dat start een grote download. Opruimen van oude volumes en images staat nog open.
+- **Testomgeving:** de testkopie van SBWebUI gebruikt `sbwebui-testomgeving\site`, niet de werkmap; bestanden eerst kopiëren.
 
 ## Stand 2026-10-20
 
@@ -60,7 +82,7 @@ Eigen Nederlands CMS met geïntegreerde AI-chat en code-modus: de AI-chat is het
 
 ## Besluiten van Ouwe
 - Hosting met Docker; thema's Helder en Hoog contrast blijven naast het donkere thema (donker standaard); skills met voorvoegsel `sbwebui-`; uitvoering stap voor stap.
-- ~~Geen AI-beeldgeneratie (ADR-009)~~ **herzien 2026-10-18:** beeldgeneratie mag lokaal met Fooocus voor wie de beheerder het toestaat (ADR-029). Muziek: voorstel (ADR-030). Sandbox publiek voor iedereen (2026-10-10).
+- ~~Geen AI-beeldgeneratie (ADR-009)~~ **herzien 2026-10-18:** beeldgeneratie mag lokaal met Fooocus voor wie de beheerder het toestaat (ADR-029). Muziek: gebouwd (ADR-030). Sandbox publiek voor iedereen (2026-10-10).
 
 ## Bekende valkuilen
 - Windows-batchbestanden: `errorlevel` blijft staan na overgeslagen regels; gebruik vlagvariabelen. `.bat` en `.vbs` hebben CRLF nodig. `^&^&` in een bat breekt `python -m venv`.
@@ -73,7 +95,6 @@ Eigen Nederlands CMS met geïntegreerde AI-chat en code-modus: de AI-chat is het
 
 ## Voorgesteld, niet gebouwd
 - ADR-024: RAG voor chats (bijlagen, kennisverzamelingen per assistent, Bibliotheek, eigen gesprekken, later de brain); embeddings `bge-m3` via Ollama, rechten vóór zoeken. Scope wacht op Ouwe.
-- Stappenplan voor 2026-10-12 in `docs/stappenplan-2026-10-12.md` (repo SBwebui). Beeldgeneratie met Fooocus botst met ADR-009 (geen AI-beeldgeneratie): besluit van Ouwe nodig.
 
 ## Openstaande vragen
 - Welke rollen mogen code uitvoeren en op welke host; Windows-pc of Linux-VPS; gastgebruik; sociale login-providers; vision-model. Zie de lijst in `docs/besluiten.md`.
