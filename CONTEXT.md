@@ -1,5 +1,5 @@
 # DieOuwe Ecosysteem — Project Brain CONTEXT
-> **AI-sessie instructies** · Altijd als eerste lezen · Laatste update: 2026-10-03
+> **AI-sessie instructies** · Altijd als eerste lezen · Laatste update: 2026-11-01
 
 ---
 
@@ -14,6 +14,9 @@ Claude leest dit **vóór elke sessie** om context op te bouwen zonder herhaling
 
 | Project | Taal | Repo | Status |
 |---|---|---|---|
+| SBWebUI (CMS met AI-chat, beeld, muziek) | PHP 8, MySQL (live); Next.js alleen als plan | `Die0uwe/SBwebui` | Actief, live |
+| CoreBot (Discord-bot met plugins) + corebot.info | Python; PHP | `Die0uwe/SBwebui` (`tools/discord-bot`, `corebot/`) | Actief, live |
+| Beeldserver (Fooocus, Flux), muziekserver (ACE-Step), Controlepaneel | Python, op de pc | `Die0uwe/SBwebui` (`tools/`) | Actief |
 | WowTracker (actuele addon, v3.5.5) | Lua (WoW Retail 12.0.5) | `Die0uwe/WowTracker` (+ `-i18n`, `-Themes`) | Actief |
 | DelveTracker (oudere addon-repo, 3.3.1-beta) | Lua (WoW Retail 12.0.5) | `Die0uwe/DelveTracker` | Verouderd, besluit open |
 | CurseBot | Python 3.11+ | `Die0uwe/cursebot` | Actief |
@@ -46,6 +49,7 @@ Claude leest dit **vóór elke sessie** om context op te bouwen zonder herhaling
 | Blizzard OAuth | `docs/tokens-and-keys/blizzard-oauth.md` |
 | Skill register (wie doet wat) | `docs/skills/skill-register.md` |
 | Alle projecten, relaties, status | `manifest/projects.yml` + `projects/<id>.md` |
+| SBWebUI, CoreBot, Fooocus, servers: actuele stand | `projects/sbwebui.md` |
 | Hoe deze brain als RAG-bron werkt | `docs/RAG-ARCHITECTURE.md` (index: `index/llms.txt`) |
 
 ---
@@ -124,6 +128,8 @@ Compass_Arrow.tga moet punt OMHOOG (North) hebben.
 | Taak | Primaire Skill |
 |---|---|
 | WoW Lua code | wow-addon-architect |
+| SBWebUI (alles) | sbwebui-project, daarna sbwebui-beta-bot of een andere sbwebui-* skill |
+| CoreBot of plugin | sbwebui-project + discord-bot-architect |
 | Python/CurseBot | discord-bot-architect |
 | WordPress PHP | wp-sa-suite / wp-senior-dev |
 | GitHub push | wow-git-manager |

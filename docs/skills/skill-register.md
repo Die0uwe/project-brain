@@ -1,5 +1,5 @@
 # Skill Register — DieOuwe Ecosysteem
-> Volledig overzicht van alle actieve skills · Laatste update: 2026-06-14
+> Volledig overzicht van alle actieve skills · Laatste update: 2026-11-01
 
 ---
 
@@ -9,7 +9,7 @@
 DieOuwe (eigenaar)
     │
     ▼
-wow-bigboss-orchestrator  ← commandopost (v2.1.0)
+wow-bigboss-orchestrator  ← commandopost (v2.3 klaar om te uploaden)
     │
     ├── OPLEIDING
     │       ├── learn
@@ -27,14 +27,21 @@ wow-bigboss-orchestrator  ← commandopost (v2.1.0)
     │       │   ├── wow-prey-research         ← prey hunt systemen
     │       │   └── wow-i18n-specialist       ← lokalisatie/talen
     │       │
-    │       ├── CurseBot / Discord
-    │       │   ├── discord-bot-architect     ← Python Discord bot
+    │       ├── CurseBot, CoreBot / Discord
+    │       │   ├── discord-bot-architect     ← Python Discord bot, ook CoreBot-plugins
     │       │   ├── cursebot-security         ← API key encryptie
     │       │   └── wow-inno-setup            ← Windows installer (.iss)
     │       │
     │       └── WordPress
     │           ├── wp-senior-dev             ← generiek WP dev
     │           └── wp-sa-suite               ← Slayer Alliance plugin
+    │
+    ├── SBWEBUI en CoreBot
+    │       ├── sbwebui-project               ← altijd eerst
+    │       ├── sbwebui-beta-bot              ← live PHP-site, bot, releases
+    │       ├── sbwebui-docker-ops            ← Docker, tunnel, back-ups
+    │       ├── sbwebui-eval-perf             ← meten
+    │       └── sbwebui-next-architect, sbwebui-cms-blocks ← alleen Next.js-plan
     │
     ├── DESIGN (via design-architect)
     │       ├── wow-ui-polish                 ← TOC, minimap, file cards
@@ -94,14 +101,14 @@ wow-bigboss-orchestrator  ← commandopost (v2.1.0)
 | general-researcher | v1.x | Kennisbank | ✅ Actief |
 | data-grinder | v1.x | Kennisbank | ✅ Actief |
 | wow-oudedoos | v1.x | Kennisbank | ✅ Actief |
-| sbwebui-project | v1.x | SBWebUI | ✅ Actief (startpunt; bijwerking voorgesteld 2026-10-11) |
+| sbwebui-project | v1.x | SBWebUI | ✅ Actief (startpunt; nieuwe tekst klaar 2026-11-01, wacht op upload door Ouwe) |
 | sbwebui-eval-perf | v1.x | SBWebUI | ✅ Actief |
 | sbwebui-next-architect | v1.x | SBWebUI | ✅ Actief |
 | sbwebui-cms-blocks | v1.x | SBWebUI | ✅ Actief |
 | sbwebui-docker-ops | v1.x | SBWebUI | ✅ Actief |
-| sbwebui-beta-bot | nieuw | SBWebUI | 🔶 Voorgesteld 2026-10-11 (Strato-beta, bot, tray); staat in de skills-lijst, nog niet door Ouwe beoordeeld |
+| sbwebui-beta-bot | v1.x | SBWebUI | ✅ In de skills-lijst (live PHP-site, bot, tray); inhoud 2026-11-01 niet nagekeken |
 
-**Totaal: 32 WoW/ecosysteem-skills plus 5 actieve en 1 voorgestelde SBWebUI-skill**
+**Totaal: 32 WoW/ecosysteem-skills plus 6 SBWebUI-skills**
 
 Niet in deze tabel: `sbwebui-ai-hub`, `-auth`, `-model-router`, `-security`, `-streaming-runs`, `-ux-nl` bestaan als concept in de SBWebUI-repo (`skills/`) en zijn niet als actieve account-skill geverifieerd.
 
