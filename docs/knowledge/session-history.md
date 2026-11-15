@@ -3,6 +3,26 @@
 
 ---
 
+## 2026-11-15 — DieOuweUI 2.24 (Roemeens), NodeHound op CurseForge, CoreBot 0.7.3 met WoW-items en Twitch-brug
+
+### Gedaan
+- DieOuweUI 2.24.0/2.24.1: Roemeens (ook site, galerij en handleiding/PDF), omweg voor een Blizzard-fout in het beroepenvenster, betrouwbaardere glinsters.
+- NodeHound 0.7.0 live op CurseForge; DieOuweUI 2.23.0 staat er sinds 14-11.
+- CoreBot 0.7.3 live met plugins wowitem en twitchbrug; corebot.info 0.5.6 met tabblad Twitch (instellingen en overzicht). Commit `9a7eb3a` op branch `corebot-0.7.3-twitch` in SBwebui.
+- Wiki bijgewerkt: pagina's DieOuweUI en NodeHound, WoW-addons met alle CurseForge-addons, CoreBot 0.7.3, corebot.info 0.5.6.
+
+### Bevindingen
+- Twitch-chat lezen kan anoniem (IRC `justinfan…`); schrijven vraagt een gekoppeld account (chat:read, chat:edit). Twitch stuurt eigen berichten van een verbinding niet terug: berichten van hetzelfde account uit de browser moeten wél verwerkt worden.
+- Twitch heeft geen openbare API voor lopende drop-campagnes.
+- Wowhead Classic kent vanilla-items; items die alleen in Forever bestaan (ID ≥ 240000) niet, ook niet op Retail.
+- De `zet-live`-tests draaien vanuit een .bat zonder UTF-8: emoji in de testuitvoer geven dan een UnicodeEncodeError (oplossing: `PYTHONUTF8=1`).
+- Ketentests van Tekenen/Zingen falen als de videokaart vol is (WoW + beeld- en muziekserver): owlai deed er 67–120 s over.
+- In `.gitignore` zijn regels die met `#` beginnen commentaar: `##sbwebui-discord-bot##/` negeert niets.
+
+### Lessen
+- Een eigen voorzichtigheidsinstelling (plugins standaard uit op live) niet zelf beslissen; vragen of de test-instelling aanhouden.
+- Een filter "negeer berichten van het eigen account" breekt alles als de bot onder het account van de streamer praat.
+
 ## Ecosysteem State — 2026-06-14 (BigBoss Full Analyse)
 
 ### DelveTracker Suite — WoW Retail 12.0.5 Midnight

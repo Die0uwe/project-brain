@@ -17,6 +17,7 @@ Claude leest dit **vóór elke sessie** om context op te bouwen zonder herhaling
 | SBWebUI (CMS met AI-chat, beeld, muziek) | PHP 8, MySQL (live); Next.js alleen als plan | `Die0uwe/SBwebui` | Actief, live |
 | CoreBot (Discord-bot met plugins) + corebot.info | Python; PHP | `Die0uwe/SBwebui` (`tools/discord-bot`, `corebot/`) | Actief, live |
 | Beeldserver (Fooocus, Flux), muziekserver (ACE-Step), Controlepaneel | Python, op de pc | `Die0uwe/SBwebui` (`tools/`) | Actief |
+| DieOuweUI (interface, 2.23.0 op CurseForge, 2.24.1 klaar) en NodeHound (0.7.0) | Lua (WoW Forever 1.60.1) | lokaal; zie `projects/wow-forever-addons.md` | Actief, op CurseForge |
 | WowTracker (actuele addon, v3.5.5) | Lua (WoW Retail 12.0.5) | `Die0uwe/WowTracker` (+ `-i18n`, `-Themes`) | Actief |
 | DelveTracker (oudere addon-repo, 3.3.1-beta) | Lua (WoW Retail 12.0.5) | `Die0uwe/DelveTracker` | Verouderd, besluit open |
 | CurseBot | Python 3.11+ | `Die0uwe/cursebot` | Actief |

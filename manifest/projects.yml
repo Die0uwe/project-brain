@@ -13,7 +13,7 @@ projects:
     version: "onbekend"
     depends_on: []
     deploys_to: ["extern:github-pages"]
-    documents: ["scriptspace-cms", "scriptspace-releases", "blueprint-cms", "slayer-suite", "delvetracker", "wowtracker", "cursebot", "panicroom", "famfinder", "sbwebui", "dieouwe-ai", "dieouwe-skills"]
+    documents: ["scriptspace-cms", "scriptspace-releases", "blueprint-cms", "slayer-suite", "delvetracker", "wowtracker", "cursebot", "panicroom", "famfinder", "sbwebui", "dieouwe-ai", "dieouwe-skills", "wow-forever-addons"]
     docs: ["projects/project-brain.md", "CONTEXT.md", "docs/RAG-ARCHITECTURE.md", "docs/OPENWEBUI-KENNISBANK.md"]
     last_checked: "2026-10-03"
     owner_skill: "wow-brain-manager"
@@ -241,6 +241,22 @@ projects:
     docs: ["projects/scriptspace-releases.md"]
     last_checked: "2026-10-03"
     owner_skill: "onbekend"
+    verified: "ja"
+
+  - id: "wow-forever-addons"
+    type: "addon"
+    name: "DieOuweUI en NodeHound (WoW Forever)"
+    url: "https://www.curseforge.com/wow/addons/dieouweui"
+    status: "actief"
+    stack: "Lua, WoW Forever 1.60.1 (interface 16001); Python-hulpmiddelen; PHP-kaart op dieouwe.nl"
+    description: "Eigen interface DieOuweUI en verzamel-addon NodeHound voor WoW Forever, beide op CurseForge; koppelingen met CoreBot (wowitem, twitchbrug)."
+    version: "DieOuweUI 2.23.0 (CurseForge), 2.24.1 klaar; NodeHound 0.7.0"
+    depends_on: []
+    deploys_to: ["extern:curseforge", "extern:dieouwe.nl"]
+    documents: []
+    docs: ["projects/wow-forever-addons.md", "docs/knowledge/session-history.md"]
+    last_checked: "2026-11-15"
+    owner_skill: "wow-addon-architect"
     verified: "ja"
 
   - id: "wowtracker"
