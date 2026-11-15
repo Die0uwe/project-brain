@@ -48,6 +48,7 @@ Naast de WoW-kennis is deze repo ook de centrale RAG-bron die alle repositories,
 - **[projects/](projects/)**: korte projectkaarten (doel, stack, build/test/deploy, openstaande punten); wat niet geverifieerd is staat als `onbekend`
 - **[docs/RAG-ARCHITECTURE.md](docs/RAG-ARCHITECTURE.md)**: chunking, indexformaat, hoe agents het gebruiken, update-flow en veiligheidsregels
 - **[index/](index/)**: gegenereerd met `python3 tools/build_index.py` (`brain.jsonl` voor embedding, `llms.txt` als kaart voor agents); tests: `python3 tools/test_build_index.py`
+- **Naar SBWebUI**: `tools/brain_sync_sbwebui.bat` zet de brain als pagina's in de Bibliotheek van SBWebUI (categorie *DieOuwe Brain*, via `kennis_sync.php`, ondertekend); de chat en de Discord-bot gebruiken die kennis. Eerst een droogloop; `/auto` voor de Taakplanner.
 
 ---
 
